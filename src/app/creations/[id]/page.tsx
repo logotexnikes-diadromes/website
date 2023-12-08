@@ -176,7 +176,7 @@ export default function Page({ params }: { params: { id: string } }) {
               </div>
             )}
             {data.fileURLS &&
-              data.fileURLS.map((i) => <Media file={i} screen={screen!} />)}
+              data.fileURLS.map((i,key) => <Media key={key} file={i} screen={screen!} />)}
           </section>
         </>
       )}
