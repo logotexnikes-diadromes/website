@@ -20,7 +20,7 @@ export default function Page() {
         ιστορία μέσα από την λογοτεχνία τους κινούμενες στην ίδια ιστοριογραμμή
         που περπάτησαν λογοτεχνικά η Άλκη Ζέη και η Ζωρζ Σαρή.
       </p>
-      <Detail>Α' κύκλος</Detail>
+      <Detail>Α`&apos;` κύκλος</Detail>
       <div className="lg:flex w-full">
         <div className="flex space-x-5 border-y my-3 p-3 border-y-black-50 w-full">
           <Image
@@ -47,7 +47,7 @@ export default function Page() {
           />{" "}
         </div>
       </div>
-      <Detail>B' κύκλος</Detail>
+      <Detail>B `&apos;` κύκλος</Detail>
       <div className="lg:flex w-full">
         <div className="flex space-x-5 border-y my-3 p-3 border-y-black-50 w-full">
           <Image

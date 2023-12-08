@@ -38,8 +38,8 @@ export default function Page() {
       if (data) {
         return (
           <div className="grid grid-cols-4 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-3">
-            {data.map((creation) => (
-              <Card className="p-5 w-full relative">
+            {data.map((creation, key) => (
+              <Card key={key} className="p-5 w-full relative">
                 <DropdownMenu>
                   <DropdownMenuTrigger className="absolute top-7 right-7 z-10">
                     <Button className="p-2" variant={"secondary"}>

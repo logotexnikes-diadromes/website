@@ -57,8 +57,8 @@ export default function Page() {
       <div className="grid max-sm:grid-cols-1 grid-cols-2 lg:grid-cols-3 gap-1">
         {exists ? (
           creations &&
-          creations.map((i) => (
-            <div className="border border-black-50 p-3 my-1 h-full flex flex-col">
+          creations.map((i,key) => (
+            <div key={key} className="border border-black-50 p-3 my-1 h-full flex flex-col">
               <div className="flex">
                 <H3Small>{i.title}</H3Small>
                 <p className="opacity-50 ml-1">{date(i.createdAt)}</p>
