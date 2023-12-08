@@ -1,8 +1,6 @@
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 import { NextResponse } from "next/server";
-//@ts-ignore
-import decode from "urldecode";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const encoded = searchParams.get("id");
@@ -20,8 +18,7 @@ export async function GET(request: Request) {
       return NextResponse.json({ exists: false });
     }
   } else {
-    const id = decode(encoded);
-
+    const id = decodeURI(encoded);
     const docRef = doc(db, "creations", id);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {

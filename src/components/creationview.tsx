@@ -3,17 +3,6 @@ import Button from "@/components/button";
 import { H2, H3 } from "@/components/typography";
 import { MediaPlayer, MediaProvider } from "@vidstack/react";
 import { PlayIcon } from "@vidstack/react/icons";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
-import {
-  MediaControlBar,
-  MediaController,
-  MediaMuteButton,
-  MediaPlayButton,
-  MediaFullscreenButton,
-  MediaTimeRange,
-  MediaVolumeRange,
-} from "media-chrome/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
