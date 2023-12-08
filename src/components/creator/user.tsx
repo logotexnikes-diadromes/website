@@ -79,16 +79,20 @@ export default function User({
                     </CardHeader>
                     <CardContent>
                       <div className="flex drop-shadow-md rounded-md border p-5">
-                        <Image
-                          alt={
-                            "εικόνα προφίλ του/ της" +
-                            auth.currentUser!.displayName
-                          }
-                          src={auth.currentUser!.photoURL}
-                          width={50}
-                          height={50}
-                          className="rounded-full w-12 h-12"
-                        />{" "}
+                        {auth.currentUser && auth.currentUser.photoURL ? (
+                          <Image
+                            alt={
+                              "εικόνα προφίλ του/ της" +
+                              auth.currentUser!.displayName
+                            }
+                            src={auth.currentUser.photoURL}
+                            width={50}
+                            height={50}
+                            className="rounded-full w-12 h-12"
+                          />
+                        ) : (
+                          <p>error</p>
+                        )}
                         <div className="ml-3">
                           <h1 className="text-xl font-medium">
                             {auth.currentUser?.displayName}
