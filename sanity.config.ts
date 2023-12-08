@@ -4,7 +4,7 @@ import announcement from "./sanity/schemas/announcement-shema";
 
 const config = defineConfig({
   name: "default",
-  title: "mitsi",
+  title: "Λογοτεχνικές διαδρομές στην ιστορία",
   projectId: "5lftpxg4",
   apiVersion: "2023-12-01",
   useCdn: false,

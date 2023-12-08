@@ -16,7 +16,7 @@ export default function Organisers() {
       text: "διεύθυνση Α/θμιας, Β/θμιας διεύθυνσης νομού Κοζάνης",
     },
     {
-      text: "σχολική βιβλιοθήκη bookbusters.",
+      text: "σχολική βιβλιοθήκη bookbusters",
       image: bookbusters,
       link: "https://bookbusters.gr",
     },

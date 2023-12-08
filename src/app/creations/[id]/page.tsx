@@ -13,7 +13,7 @@ interface Creation {
   title: string;
   description: string;
   school: string;
-  createdAt: string;
+  createdAt: Date;
   spotify: string;
   youtube: string;
   fileURLS: string[];
@@ -112,6 +112,13 @@ export default function Page({ params }: { params: { id: string } }) {
       );
     }
   }
+  function date(date: Date) {
+    const d = new Date(date);
+    const month = d.getMonth() + 1;
+    const day = d.getDate();
+    const year = d.getFullYear();
+    return day + "/" + month + "/" + year;
+  }
   return (
     <>
       {data && (
@@ -155,7 +162,7 @@ export default function Page({ params }: { params: { id: string } }) {
               <div className="flex space-x-3">
                 <p className="opacity-50">{data.school}</p>
                 <p>|</p>
-                <p className="opacity-50">{data.createdAt}</p>
+                <p className="opacity-50">{date(data.createdAt)}</p>
               </div>
               <div className="mb-5 mt-2 border-b border-b-black" />
               <p>{data.description}</p>
@@ -176,7 +183,9 @@ export default function Page({ params }: { params: { id: string } }) {
               </div>
             )}
             {data.fileURLS &&
-              data.fileURLS.map((i,key) => <Media key={key} file={i} screen={screen!} />)}
+              data.fileURLS.map((i, key) => (
+                <Media key={key} file={i} screen={screen!} />
+              ))}
           </section>
         </>
       )}

@@ -53,7 +53,7 @@ export default function Page() {
   }
   return (
     <div className="mx-10 min-h-screen">
-      <H1 className="mb-8">Δημιουγίες</H1>
+      <H1 className="mb-8">Προτάσεις συγγραφέων και αναρτημένες δημιουγίες</H1>
       <div className="grid max-sm:grid-cols-1 grid-cols-2 lg:grid-cols-3 gap-1">
         {exists ? (
           creations &&

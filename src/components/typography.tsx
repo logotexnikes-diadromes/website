@@ -8,7 +8,7 @@ export function H1({
   className?: string;
 }) {
   return (
-    <h1 className={classNames(className, "[font-size:_clamp(40px,6vw,60px)]")}>
+    <h1 className={classNames(className, "[font-size:_clamp(40px,6vw,60px)] text-red")}>
       {children}
     </h1>
   );

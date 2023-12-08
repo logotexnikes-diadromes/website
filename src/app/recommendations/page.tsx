@@ -76,13 +76,14 @@ export default function Page() {
         "Σύνθεση λογοτεχνικού αναλογίου",
         "Ηχογράφηση επιλεγμένων κειμένων",
         "Δραματοποίηση επιλεγμένων σκηνών από το λογοτεχνικό έργο συγγραφέων",
+        "Podcasts"
       ],
     },
   ];
   return (
     <>
       <section className="mx-10">
-        <H1>Προτάσεις</H1>
+        <H1>Αναγνωστικές προτάσεις</H1>
         <Detail className="mb-8">(βιβλίων και δραστηριοτήτων)</Detail>
         {reccomendations.map((i, key) => (
           <div className="h-fit mb-5 text-right" key={key}>

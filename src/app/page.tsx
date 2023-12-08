@@ -51,7 +51,7 @@ export default function Home() {
         />
       </section>
       <section className="h-screen">
-        <H1 className="mx-5">Οργανωτές</H1>
+        <H1>Οργανωτές</H1>
         <Organisers />
       </section>
     </div>

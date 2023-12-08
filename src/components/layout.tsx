@@ -33,7 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <header className="z-20 h-[60px] max-sm:h-[85px] border-b border-b-black-50 w-full fixed top-0 left-0 px-10 py-2 flex bg-white">
         <Link
           href={"/"}
-          className="w-2/3 max-w-[300px] my-auto select-none font-semibold"
+          className="w-2/3 max-w-[300px] my-auto select-none font-semibold text-red"
         >
           Λογοτεχνικές διαδρομές στην Ιστορία
         </Link>
@@ -43,7 +43,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         >
           <span
             className={`w-6 h-[1px] bg-black duration-300 ${
-              open && "rotate-45 translate-y-1.5"
+              open && "rotate-45 translate-y-1.5 bg-red"
             } `}
           ></span>
           <span
@@ -53,7 +53,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           ></span>
           <span
             className={`w-6 h-[1px] bg-black duration-300 ${
-              open && "-rotate-45 -translate-y-2"
+              open && "-rotate-45 -translate-y-2 bg-red"
             } `}
           ></span>
         </button>
@@ -91,7 +91,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </Link>
           ))}
           <Link href={"/creations/creator"}>
-            <p className="pl-3">δημιουργός</p>
+            <p className="pl-3">υποβολή εργασιών</p>
           </Link>
           <Link href={"/creations/help"}>
             <p className="pl-3">βοήθεια</p>
