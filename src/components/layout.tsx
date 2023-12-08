@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     },
     {
       link: "/recommendations",
-      text: "προτάσεις",
+      text: "αναγνωστικές προτάσεις",
     },
     {
       link: "/announcements",
@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     },
     {
       link: "/creations",
-      text: "δημιουργίες",
+      text: "αναρτημένες δημιουγίες",
     },
   ];
   return (
@@ -71,7 +71,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               className="p-5 border-y group"
               onClick={() => setTimeout(() => setOpen(false), 200)}
             >
-              <H3 className="group-hover:pl-5 duration-500">{item.text}</H3>
+              <H3 className="group-hover:pl-5 group-hover:text-red duration-500 ">
+                {item.text}
+              </H3>
             </Link>
           ))}
         </div>

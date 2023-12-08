@@ -4,7 +4,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 
-
 export default function Page() {
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -65,21 +64,20 @@ export default function Page() {
       month: "Απρίλιος",
       items: ["Όταν έφυγαν τ΄αγάλματα 20 Απριλίου"],
     },
-    {
-      author: "Προτεινόμενες δραστηριότητες",
-      month: "",
-      items: [
-        "Δημιουργία αναγνωστικών ημερολογίων",
-        "Συνανάγνωση κειμένων",
-        "Ανταλλαγή αναγνωστικών εμπειριών",
-        "Δημιουργία graphic short story",
-        "Σύνθεση λογοτεχνικού αναλογίου",
-        "Ηχογράφηση επιλεγμένων κειμένων",
-        "Δραματοποίηση επιλεγμένων σκηνών από το λογοτεχνικό έργο συγγραφέων",
-        "Podcasts"
-      ],
-    },
   ];
+  const activities = {
+    author: "Προτεινόμενες δραστηριότητες",
+    items: [
+      "Δημιουργία αναγνωστικών ημερολογίων",
+      "Συνανάγνωση κειμένων",
+      "Ανταλλαγή αναγνωστικών εμπειριών",
+      "Δημιουργία graphic short story",
+      "Σύνθεση λογοτεχνικού αναλογίου",
+      "Ηχογράφηση επιλεγμένων κειμένων",
+      "Δραματοποίηση επιλεγμένων σκηνών από το λογοτεχνικό έργο συγγραφέων",
+      "Podcasts",
+    ],
+  };
   return (
     <>
       <section className="mx-10">
@@ -101,6 +99,20 @@ export default function Page() {
             ))}
           </div>
         ))}
+
+        <div className="h-fit mb-5 text-right">
+          <div className="em top-32 text-left flex">
+            <H3 className="text-red mt-8">{activities.author}</H3>
+          </div>
+          {activities.items.map((i, key) => (
+            <H2
+              className={`border-y border-y-black-50 bg-white py-3 my-2 book cursor-default relative z-[${key}]`}
+              key={key}
+            >
+              {i}
+            </H2>
+          ))}
+        </div>
       </section>
     </>
   );

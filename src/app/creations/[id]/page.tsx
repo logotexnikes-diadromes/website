@@ -82,23 +82,6 @@ export default function Page({ params }: { params: { id: string } }) {
           </MediaPlayer>
         </>
       );
-    } else if (filetype.endsWith("pdf")) {
-      return (
-        <div
-          className="px-10 border-y border-black-50 py-3 hover:py-5 duration-300 ease-out w-full"
-          onClick={() => {
-            setIsOpen(true);
-            setContent(
-              <iframe
-                className="h-[80vh] w-[100vh] max-w-xl"
-                src={file}
-              ></iframe>
-            );
-          }}
-        >
-          <H3>Αρχείο pdf</H3>
-        </div>
-      );
     } else if (sound.includes(filetype)) {
       return <iframe className="h-5/6 w-full" src={file}></iframe>;
     } else {
@@ -148,7 +131,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     leaveFrom="opacity-100 scale-100"
                     leaveTo="opacity-0 scale-95"
                   >
-                    <Dialog.Panel className="shadow-xl transition-all">
+                    <Dialog.Panel className="shadow-xl h-fit transition-all">
                       {content}
                     </Dialog.Panel>
                   </Transition.Child>
@@ -158,7 +141,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </Transition>
           <div className="grid min-h-[65vh]">
             <div className="place-self-center md:w-2/3 mb-8 mx-10">
-              <H2>{data.title}</H2>
+              <H2 className="text-red">{data.title}</H2>
               <div className="flex space-x-3">
                 <p className="opacity-50">{data.school}</p>
                 <p>|</p>
@@ -173,12 +156,25 @@ export default function Page({ params }: { params: { id: string } }) {
               Συλλογή
             </H3>
             {data.youtube && (
-              <div className="px-10 border-y border-black-50 py-3">
-                <H3>Youtube</H3>
+              <div className="px-10 border-y border-black-50 py-3 hover:py-5 duration-300 ease-out w-full">
+                <Link href={data.youtube}>
+                  <H3>Youtube</H3>
+                </Link>
               </div>
             )}
             {data.spotify && (
-              <div className="px-10 border-y border-black-50 py-3 hover:py-5 duration-300 ease-out w-full">
+              <div
+                onClick={() => {
+                  setIsOpen(true);
+                  setContent(
+                    <iframe
+                      className="w-[80vw] max-w-md h-auto"
+                      src={data.spotify}
+                    ></iframe>
+                  );
+                }}
+                className="px-10 border-y border-black-50 py-3 hover:py-5 duration-300 ease-out w-full"
+              >
                 <H3>Spotify</H3>
               </div>
             )}

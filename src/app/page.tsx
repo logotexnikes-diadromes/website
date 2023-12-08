@@ -50,7 +50,7 @@ export default function Home() {
           data-js-darken-top
         />
       </section>
-      <section className="h-screen">
+      <section className="min-h-screen">
         <H1>Οργανωτές</H1>
         <Organisers />
       </section>

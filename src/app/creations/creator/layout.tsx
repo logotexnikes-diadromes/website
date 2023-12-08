@@ -97,5 +97,5 @@ export default function RootLayout({
       }
     }
   }
-  return <div className={font.className + " mx-10"}>{body()}</div>;
+  return <div className={font.className + " mx-10"}>{body()}<div className="pb-[100vh]"/></div>;
 }
