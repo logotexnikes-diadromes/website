@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { JetBrains_Mono, Roboto } from "next/font/google";
 import "./globals.css";
 import Layout from "@/components/layout";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
 const font = JetBrains_Mono({
   subsets: ["latin", "greek"],
@@ -28,6 +30,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className + " min-h-screen " + roboto.variable}>
         <Layout>{children}</Layout>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

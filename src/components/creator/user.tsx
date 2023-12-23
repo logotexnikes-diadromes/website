@@ -7,6 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import defaultUser from "@/app/assets/Default_pfp.png";
 import { UserInfo, signOut } from "firebase/auth";
 import { HelpCircle, LogOut } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,24 +17,22 @@ import { Fragment, useEffect, useState } from "react";
 import { UserIcon } from "lucide-react";
 import { Dialog, Transition } from "@headlessui/react";
 import getschools from "@/utils/getschools";
-export default function User({
-  user,
-  font,
-}: {
-  user: UserInfo;
-  font: { className: string };
-}) {
+import Link from "next/link";
+import toast from "react-hot-toast";
+export default function User({ user }: { user: UserInfo }) {
   let [isOpen, setIsOpen] = useState(false);
   const [schools, setSchools] = useState<String[]>();
   useEffect(() => {
     if (auth.currentUser?.uid) {
-      getschools(auth.currentUser?.uid).then((schools) => {
-        if (schools !== null) {
-          setSchools(schools);
-        } else {
-          setSchools(["Κανένα σχολείο"]);
-        }
-      });
+      getschools(auth.currentUser?.uid)
+        .then((schools) => {
+          if (schools !== null) {
+            setSchools(schools);
+          } else {
+            setSchools(["Κανένα σχολείο"]);
+          }
+        })
+        .catch(() => toast.error("Σφάλμα! "));
     } else {
       setSchools(["ERROR NO_USERID"]);
     }
@@ -68,17 +67,17 @@ export default function User({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="shadow-xl transition-all">
-                  <Card
+                <Dialog.Panel className="transition-all">
+                  <div
                     className={
-                      font.className + " max-w-[500px] w-full relative z-20"
+                      "bg-white border border-black-50 max-w-[500px] w-full relative z-20 "
                     }
                   >
                     <CardHeader>
                       <CardTitle>Προφίλ</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="flex drop-shadow-md rounded-md border p-5">
+                      <div className="flex  border p-5">
                         {auth.currentUser && auth.currentUser.photoURL ? (
                           <Image
                             alt={
@@ -107,13 +106,17 @@ export default function User({
                         }`}
                       >
                         <span className="opacity-75">
-                          <TypographyH4>Σχολεία:</TypographyH4>
+                          <TypographyH4>
+                            {schools && schools.length > 1
+                              ? "Σχολεία:"
+                              : "Σχολείo:"}{" "}
+                          </TypographyH4>
                         </span>
-                        <div className="">
+                        <div className="mt-2">
                           {schools &&
                             schools.map((school, index) => (
                               <span
-                                className="bg-gray-200 m-2 p-2 rounded-md text-sm font-medium inline-block select-none"
+                                className="mr-2 mb-2 mt-0.5 p-2 text-sm font-medium inline-block select-none border-black-50 border"
                                 key={index}
                               >
                                 {school}
@@ -122,7 +125,7 @@ export default function User({
                         </div>
                       </div>
                     </CardContent>
-                  </Card>
+                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -133,19 +136,13 @@ export default function User({
         <DropdownMenuTrigger>
           <Image
             alt={"εικόνα προφίλ του/ της" + user.displayName}
-            src={
-              user.photoURL
-                ? user.photoURL
-                : "https://via.placeholder.com/40x40"
-            }
+            src={user.photoURL ? user.photoURL : defaultUser}
             width={40}
             height={40}
-            className="rounded-full -mb-2"
+            className="rounded-full"
           />{" "}
         </DropdownMenuTrigger>
-        <DropdownMenuContent
-          className={font.className + " w-52 relative right-10 bottom-2"}
-        >
+        <DropdownMenuContent className={" w-52 relative right-10 bottom-2"}>
           <DropdownMenuGroup>
             <DropdownMenuItem onClick={() => setIsOpen(true)}>
               <UserIcon className="mr-2 h-5 w-5" />
@@ -154,8 +151,10 @@ export default function User({
           </DropdownMenuGroup>
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <HelpCircle className="mr-2 h-5 w-5" />
-              <span>Βοήθεια</span>
+              <Link className="flex" href={"/creations/help"}>
+                <HelpCircle className="mr-2 h-5 w-5" />
+                <span>Βοήθεια</span>
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />

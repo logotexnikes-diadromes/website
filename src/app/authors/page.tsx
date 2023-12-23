@@ -9,7 +9,7 @@ import Image from "next/image";
 export default function Page() {
   return (
     <section className="mx-10">
-      <H1>Συγγραφείς</H1>
+      <H1 >Συγγραφείς</H1>
       <p className="max-lg:w-full w-1/2 mb-8">
         Οι «Λογοτεχνικές διαδρομές στην ιστορία» ξεκινούν τον Οκτώβριο και
         εκτυλίσσονται σε δύο κύκλους. Ο πρώτος κύκλος αποτελεί ένα αφιέρωμα σε

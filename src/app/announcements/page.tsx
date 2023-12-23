@@ -44,22 +44,13 @@ export default function Page() {
   return (
     <section className="mx-10 min-h-screen">
       <H1 className="mb-8">Ανακοινώσεις</H1>
-      <div className="">
+      <div className="lg:grid grid-cols-2">
         {announcements &&
           announcements.map((i: Announcement, key: number) => (
             <article
-              className={`group border-y border-y-black-50 bg-white py-3 my-2 book relative z-[${key}]`}
+              className={`border-black-50 bg-white py-3 my-2 border-b group border-y-black-50 book relative z-[${key}]`}
               key={key}
             >
-              {i.image && (
-                <Image
-                  className="group-hover:mb-5 w-auto group-hover:opacity-100 group-hover:max-h-[33vh] max-h-0 opacity-0 duration-1000 delay-300"
-                  src={i.image}
-                  alt={i.alt}
-                  width={screen?.width}
-                  height={screen?.height}
-                />
-              )}
               <H3>{i.title}</H3>
               <p className="opacity-50 ml-1">{date(i._createdAt)}</p>
               <BlockContent blocks={i.content} />

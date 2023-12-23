@@ -95,8 +95,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Link href={"/creations/creator"}>
             <p className="pl-3">υποβολή εργασιών</p>
           </Link>
-          <Link href={"/creations/help"}>
-            <p className="pl-3">βοήθεια</p>
+          <Link href={"/help"}>
+            <p>βοήθεια</p>
           </Link>
         </div>
       </footer>

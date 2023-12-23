@@ -5,14 +5,12 @@ body {
   position: relative;
   overflow-x: hidden;
 }
-/* ===== Scrollbar CSS ===== */
-/* Firefox */
+
 * {
   scrollbar-width: auto;
   scrollbar-color: #000000 #ffffff00;
 }
 
-/* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   width: 5px;
 }
@@ -25,6 +23,16 @@ body {
   background-color: #000000;
   border-radius: 0px;
   border: 0px solid #ffffff00;
+}
+
+::-moz-selection {
+  color: #BB4430;
+  background: #1b1b3a;
+}
+
+::selection {
+  color: #BB4430;
+  background: #1b1b3a;
 }
 @layer base {
   :root {

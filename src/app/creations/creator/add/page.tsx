@@ -1,5 +1,4 @@
 "use client";
-import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,7 +25,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
-import { Toaster } from "@/components/ui/toaster";
 import {
   Collapsible,
   CollapsibleContent,
@@ -34,6 +32,7 @@ import {
 } from "@/components/ui/collapsible";
 import getschools from "@/utils/getschools";
 import { auth } from "@/utils/firebase";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   title: z.string({ required_error: "Ο τίτλος είναι απαρίτητος" }),
@@ -44,7 +43,6 @@ const formSchema = z.object({
 });
 
 export default function Page() {
-  const { toast } = useToast();
   const [files, setFiles] = useState<null | FileList>(null);
   const [schools, setSchools] = useState<String[] | null>(null);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -73,29 +71,33 @@ export default function Page() {
         size = size + file.size;
       });
       if (size > 104857600) {
-        toast({
-          title: "Πολύ μεγάλα αρχεία!",
-          description: "Το σύνολο των αρχείων σας ξεπερνά τα 100mb.",
-        });
+        toast(
+          <div>
+            <p className="mb-0.5">Πολύ μεγάλα αρχεία!</p>
+            <span className="text-xs">
+              Το σύνολο των αρχείων σας ξεπερνά τα 100mb.
+            </span>
+          </div>
+        );
       } else {
+        toast.loading("Προσθήκη...");
+        toast.loading("Μεταφόρτωση αρχείων...");
         addfunc(values, files).then(() => {
-          toast({
-            title: "Η δημιουργία σας προστέθηκε!",
-          });
+          toast.dismiss();
+          toast("Η δημιουργία σας προστέθηκε!");
         });
       }
     } else {
+      toast.loading("Προσθήκη...");
       addfunc(values, null).then(() => {
-        toast({
-          title: "Η δημιουργία σας προστέθηκε!",
-        });
+        toast.dismiss();
+        toast("Η δημιουργία σας προστέθηκε!");
       });
     }
   }
 
   return (
-    <div>
-      <Toaster />
+    <div className="mx-10">
       <div className="flex mb-8">
         <div className="flex items-center space-x-2">
           <Link href={"./"}>
@@ -173,7 +175,7 @@ export default function Page() {
             </FormControl>
             <FormDescription>
               Τα αρχεία βίντεο και μεγάλα αρχεία ήχου τα ανεβάζετε{" "}
-              <Link href={""} className="underline">
+              <Link href={"/help"} className="underline">
                 έτσι
               </Link>
               .

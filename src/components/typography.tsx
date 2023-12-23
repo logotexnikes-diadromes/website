@@ -47,9 +47,9 @@ export function H3Small({
   className?: string;
 }) {
   return (
-    <h3 className={classNames(className, "[font-size:_clamp(20px,2vw,25px)]")}>
+    <h4 className={classNames(className, "[font-size:_clamp(19px,3vw,25px)]")}>
       {children}
-    </h3>
+    </h4>
   );
 }
 export function Detail({
