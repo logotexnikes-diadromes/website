@@ -1,14 +1,12 @@
 "use client";
-import { H1, H2, H3Small } from "@/components/typography";
+import { Detail, H1, H2, H3Small } from "@/components/typography";
 import { Fragment, useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 import Fuse from "fuse.js";
 import Link from "next/link";
 import { Dialog, Transition } from "@headlessui/react";
-import Image from "next/image";
-import demo from "../assets/test.webp";
-import Button from "@/components/button";
+import { useRouter, useSearchParams } from "next/navigation";
 interface Creation {
   title: string;
   fileURLS: string[];
@@ -24,11 +22,16 @@ interface FuseCreation {
 }
 
 export default function Page() {
+  const router = useRouter();
   const [exists, setExists] = useState<boolean>(true);
   const [creations, setCreations] = useState<Creation[] | null>(null);
   const [open, setOpen] = useState<boolean>(false);
   const [results, setResults] = useState<FuseCreation[] | null>(null);
-  const [search, setSearch] = useState<string>("");
+
+  const searchParams = useSearchParams();
+  const search = searchParams.get("s") as string;
+
+  // fetch data
   useEffect(() => {
     onSnapshot(collection(db, "creations"), (docs) => {
       const creations: any = [];
@@ -45,64 +48,20 @@ export default function Page() {
       }
     });
   }, []);
+
+  // update search
   useEffect(() => {
     if (creations) {
       const fuseOptions = {
         keys: ["title", "school", "description"],
         threshold: 0.4,
       };
-      const test = [
-        {
-          title: "hello",
-          school: "hello",
-          description: "hello",
-          createdAt: "2/2/2024",
-        },
-        {
-          title: "hello",
-          school: "hello",
-          description: "hello",
-          createdAt: "2/2/2024",
-        },
-        {
-          title: "hello",
-          school: "hello",
-          description: "hello",
-          createdAt: "2/2/2024",
-        },
-        {
-          title: "hello",
-          school: "hello",
-          description: "hello",
-          createdAt: "2/2/2024",
-        },
-        {
-          title: "hello",
-          school: "hello",
-          description: "hello",
-          createdAt: "2/2/2024",
-        },
-        {
-          title: "hello",
-          school: "hello",
-          description: "hello",
-          createdAt: "2/2/2024",
-        },
-        {
-          title: "hello",
-          school: "hello",
-          description: "hello",
-          createdAt: "2/2/2024",
-        },
-      ];
-
       const fuse = new Fuse(creations, fuseOptions);
       const result = fuse.search(search);
       if (result.length === 0) {
         setResults(null);
       } else {
         setResults(fuse.search(search));
-        console.log(results);
       }
     }
   }, [search]);
@@ -115,7 +74,7 @@ export default function Page() {
     return day + "/" + month + "/" + year;
   }
   return (
-    <div className="mx-10">
+    <div className="sm:mx-10 mx-6">
       <div className="flex">
         <H1 className={`mb-8`}>Aναρτημένες δημιουγίες</H1>
         <svg
@@ -197,30 +156,47 @@ export default function Page() {
                       placeholder="Τίτλος, σχολείο, περιγραφή"
                       className="w-full h-10 border-b p-5 py-6 border-b-black-50 focus:outline-none mb-5"
                       value={search}
-                      onChange={(e) => setSearch(e.target.value)}
+                      onChange={(e) =>
+                        router.push(`?s=${e.target.value}`, { scroll: false })
+                      }
                     ></input>
-                    <div className="space-y-3 grid my-auto overflow-y-auto max-h-64">
-                      {results ? (
-                        results.map((i, key) => (
-                          <Link
-                            key={key}
-                            className="border-b group border-black-50 my-1 flex flex-col p-2"
-                            href={"/creations/" + i.item.id}
-                          >
-                            <p>{i.item.title}</p>
-                            {results.length < 4 && (
-                              <div className="flex mb-0 mt-auto">
-                                <p className="opacity-50">{i.item.school}</p>
-                                <p className="opacity-50 ml-auto">
-                                  {date(i.item.createdAt)}
-                                </p>
+                    <div className="space-y-3 grid my-auto overflow-y-auto overflow-x-hidden max-h-64">
+                      {results
+                        ? results.map((i, key) => (
+                            <Link
+                              key={key}
+                              className="border-b group border-black-50 my-1 flex flex-col p-2 "
+                              href={"/creations/" + i.item.id}
+                            >
+                              <p>{i.item.title}</p>
+                              {results.length < 4 && (
+                                <div className="flex mb-0 mt-auto">
+                                  <p className="opacity-50">{i.item.school}</p>
+                                  <p className="opacity-50 ml-auto">
+                                    {date(i.item.createdAt)}
+                                  </p>
+                                </div>
+                              )}
+                            </Link>
+                          ))
+                        : search !== "" && (
+                            <Transition
+                              appear
+                              show={search !== ""}
+                              enter="ease-out duration-700 delay-300"
+                              leave="ease-in duration-700 delay-300"
+                              enterFrom="opacity-0 -translate-x-2"
+                              enterTo="opacity-100 translate-x-0"
+                              leaveFrom="opacity-100 translate-x-0"
+                              leaveTo="opacity-0 -translate-x-2"
+                            >
+                              <div className="grid h-64">
+                                <Detail className="place-self-center">
+                                  κανένα αποτέλεσμα
+                                </Detail>
                               </div>
-                            )}
-                          </Link>
-                        ))
-                      ) : (
-                        <>κανενα αποτελεσμα</>
-                      )}
+                            </Transition>
+                          )}
                     </div>
                   </div>
                 </Dialog.Panel>

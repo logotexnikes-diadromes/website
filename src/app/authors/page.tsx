@@ -1,15 +1,9 @@
-import { Detail, H1, H2, H3 } from "@/components/typography";
-import alkizei from "@/app/assets/authors/alkizei.jpg";
-import zorzsari from "@/app/assets/authors/Zorz_Sari.jpg";
-import mitsiali from "@/app/assets/authors/mitsiali.jpg";
-import loti from "@/app/assets/authors/loti.jpg";
-import darlasi from "@/app/assets/authors/darlasi.webp";
-import covo from "@/app/assets/authors/Kelly-Covo-foto.jpg";
+import { Detail, H1, H2 } from "@/components/typography";
 import Image from "next/image";
 export default function Page() {
   return (
-    <section className="mx-10">
-      <H1 >Συγγραφείς</H1>
+    <section className="sm:mx-10 mx-6">
+      <H1>Συγγραφείς</H1>
       <p className="max-lg:w-full w-1/2 mb-8">
         Οι «Λογοτεχνικές διαδρομές στην ιστορία» ξεκινούν τον Οκτώβριο και
         εκτυλίσσονται σε δύο κύκλους. Ο πρώτος κύκλος αποτελεί ένα αφιέρωμα σε
@@ -26,7 +20,7 @@ export default function Page() {
           <Image
             className="w-2/5 aspect-square object-cover"
             alt={"Άλκη Ζέη"}
-            src={alkizei}
+            src={"/authors/1.jpg"}
             width={9999}
             height={9999}
           />{" "}
@@ -41,7 +35,7 @@ export default function Page() {
           <Image
             className="w-2/5 aspect-square object-cover mr-0 ml-auto"
             alt={"Ζωρζ Σαρή"}
-            src={zorzsari}
+            src={"/authors/2.webp"}
             width={9999}
             height={9999}
           />{" "}
@@ -53,7 +47,7 @@ export default function Page() {
           <Image
             className="w-2/5 aspect-square object-cover"
             alt={"Αλεξάνδρα Μητσιάλη"}
-            src={mitsiali}
+            src={"/authors/3.jpg"}
             width={9999}
             height={9999}
           />{" "}
@@ -68,7 +62,7 @@ export default function Page() {
           <Image
             className="w-2/5 aspect-square object-cover mr-0 ml-auto"
             alt={"Λότη Πέτροβιτς Ανδρουτσοπούλου"}
-            src={loti}
+            src={"/authors/4.jpg"}
             width={9999}
             height={9999}
           />{" "}
@@ -79,7 +73,7 @@ export default function Page() {
           <Image
             className="w-2/5 aspect-square object-cover"
             alt={"Αγγελική Δαρλάση"}
-            src={darlasi}
+            src={"/authors/5.jpg"}
             width={9999}
             height={9999}
           />{" "}
@@ -94,7 +88,7 @@ export default function Page() {
           <Image
             className="w-2/5 aspect-square object-cover mr-0 ml-auto"
             alt={"Κέλλυ Ματάθια Κόβο"}
-            src={covo}
+            src={"/authors/6.jpg"}
             width={9999}
             height={9999}
           />{" "}

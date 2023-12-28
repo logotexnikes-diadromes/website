@@ -1,7 +1,7 @@
 import { createClient, groq } from "next-sanity";
 export async function getAnnouncements() {
   const client = createClient({
-    projectId: "5lftpxg4",
+    projectId: process.env.NEXT_PUBLIC_SANITY as string,
     dataset: "production",
     useCdn: false,
     apiVersion: "2023-12-01",

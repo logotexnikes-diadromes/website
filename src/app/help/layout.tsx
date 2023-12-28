@@ -15,7 +15,7 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
       {url !== "" && (
-        <div className="border-b border-black-50 flex px-10 py-1 sticky top-[60px] -mt-2 max-sm:top-[85px] bg-white">
+        <div className="border-b border-black-50 flex sm:px-10 px-6 py-1 sticky top-[60px] -mt-2 max-sm:top-[85px] bg-white">
           <Link href={"/help"} className="w-8 h-8 opacity-100 p-0.5">
             <svg
               data-name="Layer 1"
@@ -52,7 +52,7 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
           <p className="opacity-50 self-center ml-2">{url}</p>
         </div>
       )}
-      <div className="mx-10 lg:w-2/3 min-h-screen">
+      <div className="sm:mx-10 mx-6 lg:w-2/3 min-h-screen">
         {children}
         {url !== "" && (
           <>

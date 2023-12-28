@@ -6,6 +6,8 @@ import { auth } from "@/utils/firebase";
 import { Envelope, X } from "./svgs";
 import * as Tooltip from "@radix-ui/react-tooltip";
 
+
+
 export default function Processing({
   user,
   notified,
@@ -39,6 +41,7 @@ export default function Processing({
         </div>
         <div className="flex">
           <Button
+            className="mt-1"
             onClick={() => {
               signOut(auth);
               window.location.reload();
@@ -80,7 +83,9 @@ export default function Processing({
                   <span
                     className={`absolute top-0 left-0 right-0  text-center h-full flex items-center p-1
               ${
-                notified.state === "error" ? "opacity-100" : "translate-x-2 opacity-0"
+                notified.state === "error"
+                  ? "opacity-100"
+                  : "translate-x-2 opacity-0"
               }
               duration-1000
               `}
@@ -90,7 +95,9 @@ export default function Processing({
                   <span
                     className={`absolute top-0 left-0 right-0 m-auto text-sm text-center
               ${
-                notified.state === "wait" ? "opacity-100" : "-translate-x-2 opacity-0"
+                notified.state === "wait"
+                  ? "opacity-100"
+                  : "-translate-x-2 opacity-0"
               }
               duration-300
               `}
@@ -103,7 +110,9 @@ export default function Processing({
                 <Tooltip.Content
                   className="TooltipContent bg-white border border-black-50 p-2 text-xs max-w-[200px] mt-1"
                   sideOffset={-100}
-                >{notified.message}</Tooltip.Content>
+                >
+                  {notified.message}
+                </Tooltip.Content>
               </Tooltip.Portal>
             </Tooltip.Root>
           </Tooltip.Provider>

@@ -87,7 +87,7 @@ export default function Page() {
 
   return (
     <>
-      <section className="mx-10">
+      <section className="sm:mx-10 mx-6">
         <style global jsx>
           {`
             #gradient-canvas {
@@ -102,7 +102,7 @@ export default function Page() {
         <Detail className="mb-8">(βιβλίων και δραστηριοτήτων)</Detail>
         <Link
           href={"/recommendations/authors"}
-          className="relative h-96 w-full p-10 group grid mb-20"
+          className="relative h-96 w-full p-5 group grid mb-20"
         >
           <canvas
             id="gradient-canvas"

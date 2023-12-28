@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 import User from "@/components/creator/user";
 import { UserInfo } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { Skeleton } from "@/components/ui/skeleton";
 import Processing from "@/components/creator/processing";
 import Login from "@/components/creator/login";
 import toast, { Toaster } from "react-hot-toast";
+
 export default function RootLayout({
   children,
 }: {
@@ -100,10 +100,32 @@ export default function RootLayout({
   function body() {
     if (loading) {
       return (
-        <div className="h-screen mx-10">
-          <Skeleton className="w-full max-w-sm h-10" />
-          <Skeleton className="w-full h-64 mt-8" />
-          <Skeleton className="w-10 h-10 rounded-full fixed bottom-2 right-10" />
+        <div className={"h-screen sm:mx-10 mx-6 grid place-items-center"}>
+          <style jsx>
+            {`
+              .loader {
+                margin-top: -50px;
+                width: 48px;
+                height: 48px;
+                border: 2px solid #bb4430;
+                border-bottom-color: transparent;
+                border-radius: 50%;
+                display: inline-block;
+                box-sizing: border-box;
+                animation: rotation 1s linear infinite;
+              }
+
+              @keyframes rotation {
+                0% {
+                  transform: rotate(0deg);
+                }
+                100% {
+                  transform: rotate(360deg);
+                }
+              }
+            `}
+          </style>
+          <span className="loader"></span>
         </div>
       );
     } else {
@@ -111,7 +133,7 @@ export default function RootLayout({
         if (authorised) {
           return (
             <>
-              <header className="w-fit fixed bottom-0 right-0 px-10">
+              <header className="w-fit fixed bottom-0 right-0 sm:px-10 px-6">
                 <User user={user} />
               </header>
 
@@ -127,7 +149,7 @@ export default function RootLayout({
     }
   }
   return (
-    <div className="min-h-screen">
+    <div className={"min-h-screen"}>
       {body()}
       <Toaster
         position="top-right"

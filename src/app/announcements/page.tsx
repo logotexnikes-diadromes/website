@@ -21,15 +21,10 @@ interface dimensions {
 }
 
 export default function Page() {
-  const [screen, setScreen] = useState<dimensions | null>(null);
   const [announcements, setAnnouncements] = useState<Announcement[] | null>(
     null
   );
   useEffect(() => {
-    setScreen({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
     getAnnouncements().then((r) => {
       setAnnouncements(r);
     });
@@ -42,17 +37,19 @@ export default function Page() {
     return day + "/" + month + "/" + year;
   }
   return (
-    <section className="mx-10 min-h-screen">
+    <section className="sm:mx-10 mx-6 min-h-screen">
       <H1 className="mb-8">Ανακοινώσεις</H1>
-      <div className="lg:grid grid-cols-2">
+      <div className="">
         {announcements &&
           announcements.map((i: Announcement, key: number) => (
             <article
-              className={`border-black-50 bg-white py-3 my-2 border-b group border-y-black-50 book relative z-[${key}]`}
+              className={`border-black-50 bg-white py-3 my-2 border-b lg:flex`}
               key={key}
             >
-              <H3>{i.title}</H3>
-              <p className="opacity-50 ml-1">{date(i._createdAt)}</p>
+              <div className="pr-3 mr-3 lg:border-r border-black-50 w-96">
+                <H3>{i.title}</H3>
+                <p className="opacity-50">{date(i._createdAt)}</p>
+              </div>
               <BlockContent blocks={i.content} />
             </article>
           ))}

@@ -5,33 +5,33 @@ body {
   position: relative;
   overflow-x: hidden;
 }
-
+/* Firefox */
 * {
-  scrollbar-width: auto;
-  scrollbar-color: #000000 #ffffff00;
+  scrollbar-width: thin;
+  scrollbar-color: #bb4430 #ffffff;
 }
 
+/* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
 }
 
 *::-webkit-scrollbar-track {
-  background: #ffffff00;
+  background: #ffffff;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #000000;
-  border-radius: 0px;
-  border: 0px solid #ffffff00;
+  background-color: #bb4430;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
 }
-
 ::-moz-selection {
-  color: #BB4430;
+  color: #bb4430;
   background: #1b1b3a;
 }
 
 ::selection {
-  color: #BB4430;
+  color: #bb4430;
   background: #1b1b3a;
 }
 @layer base {

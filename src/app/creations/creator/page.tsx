@@ -13,7 +13,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { TypographyH3 } from "@/components/ui/typography";
 import Link from "next/link";
 import { Fullscreen, MoreVertical, Plus, TrashIcon } from "lucide-react";
-import "./globals.css";
 import get from "@/utils/get";
 import { Badge } from "@/components/ui/badge";
 import deletefunc from "@/utils/delete";
@@ -62,7 +61,7 @@ export default function Page() {
               <Card key={key} className="p-5 w-full relative">
                 <AlertDialog>
                   <DropdownMenu>
-                    <DropdownMenuTrigger className="absolute top-7 right-7 z-10">
+                    <DropdownMenuTrigger className="absolute top-2 right-2 z-10">
                       <Button className="p-2" variant={"secondary"}>
                         <MoreVertical />
                       </Button>
@@ -86,7 +85,9 @@ export default function Page() {
                     </DropdownMenuContent>
                   </DropdownMenu>
 
-                  <CardTitle className="mb-1">{creation.title}</CardTitle>
+                  <CardTitle className="mb-1 leading-8">
+                    {creation.title}
+                  </CardTitle>
                   <CardDescription className="space-y-1 space-x-1">
                     {creation.files && (
                       <Badge variant={"secondary"}>
@@ -155,13 +156,13 @@ export default function Page() {
     }
   }
   return (
-    <div className="space-y-5 mx-10">
+    <div className="space-y-5 sm:mx-10 mx-6">
       <section>
         <div className="flex items-center space-x-2 relative">
           <TypographyH3>Οι δημιουργίες μου</TypographyH3>
           <Link href={"creator/add"} className="absolute right-0">
-            <Button className="p-2 rounded-full ">
-              <Plus />
+            <Button className="px-4 rounded-full ">
+              <Plus className="mr-2" /> Προσθήκη
             </Button>
           </Link>
         </div>

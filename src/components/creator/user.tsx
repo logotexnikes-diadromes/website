@@ -70,14 +70,14 @@ export default function User({ user }: { user: UserInfo }) {
                 <Dialog.Panel className="transition-all">
                   <div
                     className={
-                      "bg-white border border-black-50 max-w-[500px] w-full relative z-20 "
+                      "bg-white border max-w-[500px] w-full relative z-20 rounded-lg"
                     }
                   >
                     <CardHeader>
                       <CardTitle>Προφίλ</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="flex  border p-5">
+                      <div className="flex  border p-5 rounded-lg">
                         {auth.currentUser && auth.currentUser.photoURL ? (
                           <Image
                             alt={
@@ -116,7 +116,7 @@ export default function User({ user }: { user: UserInfo }) {
                           {schools &&
                             schools.map((school, index) => (
                               <span
-                                className="mr-2 mb-2 mt-0.5 p-2 text-sm font-medium inline-block select-none border-black-50 border"
+                                className="mr-2 mb-2 mt-0.5 p-2 text-sm font-medium inline-block select-none bg-slate-100 rounded-md"
                                 key={index}
                               >
                                 {school}
@@ -151,7 +151,7 @@ export default function User({ user }: { user: UserInfo }) {
           </DropdownMenuGroup>
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <Link className="flex" href={"/creations/help"}>
+              <Link className="flex" href={"/help"}>
                 <HelpCircle className="mr-2 h-5 w-5" />
                 <span>Βοήθεια</span>
               </Link>

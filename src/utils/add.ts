@@ -11,7 +11,6 @@ export default function Add(data: Add, files: FileList | null) {
     const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     const yyyy = today.getFullYear();
     const date = dd + "/" + mm + "/" + yyyy;
-    console.log(data);
     if (auth.currentUser) {
       const id = slugify(data.title + "-" + data.school);
       if (!files) {

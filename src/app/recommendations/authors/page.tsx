@@ -81,13 +81,12 @@ export default function Page() {
   return (
     <>
       <section>
-        <H1 className="mx-10">Αναγνωστικές προτάσεις</H1>
-        <Detail className="mb-8 mx-10">(συγγραφέων του προγράμματος)</Detail>
+        <H1 className="sm:mx-10 mx-6">Αναγνωστικές προτάσεις</H1>
+        <Detail className="mb-8 sm:mx-10 mx-6">
+          (συγγραφέων του προγράμματος)
+        </Detail>
         {reccomendations.map((i, key) => (
-          <div
-            key={key}
-            className={`border-b  border-black-50 px-10 py-3`}
-          >
+          <div key={key} className={`border-b  border-black-50 px-10 py-3`}>
             <div>
               <H3 className="inline-block">{i.author}</H3>
               <H3 className="opacity-50 inline-block"> προτείνει:</H3>

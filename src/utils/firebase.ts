@@ -5,12 +5,12 @@ import { getFirestore } from "firebase/firestore";
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAnCDK8ErjOO-RCXFBg6Zk_v-WzmvqyihE",
-  authDomain: "fireapp-9dd9d.firebaseapp.com",
-  projectId: "fireapp-9dd9d",
-  storageBucket: "fireapp-9dd9d.appspot.com",
-  messagingSenderId: "962928843236",
-  appId: "1:962928843236:web:4450f64cbb4d9cc551cff1",
+  apiKey: process.env.NEXT_PUBLIC_FB_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FB_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FB_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FB_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FB_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FB_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
