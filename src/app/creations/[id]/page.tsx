@@ -4,14 +4,9 @@ import { Fragment, useEffect, useState } from "react";
 import { H2, H3 } from "@/components/typography";
 import Link from "next/link";
 import Button from "@/components/button";
-import { MediaPlayer, MediaProvider } from "@vidstack/react";
-import "@vidstack/react/player/styles/default/theme.css";
-import "@vidstack/react/player/styles/default/layouts/video.css";
-import { PlayIcon } from "@vidstack/react/icons";
 import { Dialog, Transition } from "@headlessui/react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/utils/firebase";
-import NotFound from "@/app/not-found";
 
 interface Creation {
   title: string;
@@ -86,10 +81,7 @@ export default function Page({ params }: { params: { id: string } }) {
     } else if (video.includes(filetype)) {
       return (
         <>
-          <MediaPlayer src={file} autoplay>
-            <PlayIcon size={20} />
-            <MediaProvider />
-          </MediaPlayer>
+          <iframe src={file}></iframe>
         </>
       );
     } else if (sound.includes(filetype)) {
