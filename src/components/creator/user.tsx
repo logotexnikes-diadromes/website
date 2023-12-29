@@ -4,7 +4,6 @@ import { UserInfo, signOut } from "firebase/auth";
 import { HelpCircle, LogOut } from "lucide-react";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { auth } from "@/utils/firebase";
-import { TypographyH4 } from "@/components/ui/typography";
 import { Fragment, useEffect, useState, useRef } from "react";
 import { UserIcon } from "lucide-react";
 import { Dialog, Transition, Popover } from "@headlessui/react";
@@ -100,11 +99,11 @@ export default function User({ user }: { user: UserInfo }) {
                         }`}
                       >
                         <span className="opacity-75">
-                          <TypographyH4>
+                          <p className="text-xl opacity-75">
                             {schools && schools.length > 1
                               ? "Σχολεία:"
                               : "Σχολείo:"}{" "}
-                          </TypographyH4>
+                          </p>
                         </span>
                         <div className="mt-2">
                           {schools &&

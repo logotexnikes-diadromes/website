@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@/components/button";
 import { Controller, useForm } from "react-hook-form";
 import Link from "next/link";
-import { TypographyH3 } from "@/components/ui/typography";
 import { ChevronLeft, ChevronsUpDown } from "lucide-react";
 import addfunc from "@/utils/add";
 import * as z from "zod";
@@ -13,6 +12,7 @@ import { auth } from "@/utils/firebase";
 import toast from "react-hot-toast";
 import Input from "@/components/input";
 import { Disclosure, Listbox, Transition } from "@headlessui/react";
+import { H3Small } from "@/components/typography";
 
 const formSchema = z.object({
   title: z.string({ required_error: "Ο τίτλος είναι απαρίτητος" }),
@@ -84,7 +84,7 @@ export default function Page() {
           <Link href={"./"}>
             <ChevronLeft />
           </Link>
-          <TypographyH3>Προσθήκη δημιουργίας</TypographyH3>
+          <H3Small className="font-medium">Προσθήκη δημιουργίας</H3Small>
         </div>
         <div className="mb-8" />
       </div>
