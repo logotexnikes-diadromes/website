@@ -1,38 +1,18 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useForm } from "react-hook-form";
+import Button from "@/components/button";
+import { Controller, useForm } from "react-hook-form";
 import Link from "next/link";
 import { TypographyH3 } from "@/components/ui/typography";
 import { ChevronLeft, ChevronsUpDown } from "lucide-react";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form";
 import addfunc from "@/utils/add";
 import * as z from "zod";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useEffect, useState } from "react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { Fragment, useEffect, useState } from "react";
 import getschools from "@/utils/getschools";
 import { auth } from "@/utils/firebase";
 import toast from "react-hot-toast";
+import Input from "@/components/input";
+import { Disclosure, Listbox, Transition } from "@headlessui/react";
 
 const formSchema = z.object({
   title: z.string({ required_error: "Ο τίτλος είναι απαρίτητος" }),
@@ -45,16 +25,16 @@ const formSchema = z.object({
 export default function Page() {
   const [files, setFiles] = useState<null | FileList>(null);
   const [schools, setSchools] = useState<String[] | null>(null);
-  const form = useForm<z.infer<typeof formSchema>>({
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+    watch,
+  } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      title: undefined,
-      school: undefined,
-      description: undefined,
-      youtube: undefined,
-      spotify: undefined,
-    },
   });
+
   useEffect(() => {
     const user: any = auth.currentUser;
     getschools(user.uid).then((schools) => {
@@ -64,7 +44,7 @@ export default function Page() {
     });
   }, []);
 
-  function onSubmit(values: z.infer<typeof formSchema>, e: any) {
+  function onSubmit(values: z.infer<typeof formSchema>) {
     if (files !== null) {
       let size = 0;
       Array.from(files).forEach((file) => {
@@ -95,6 +75,7 @@ export default function Page() {
       });
     }
   }
+  const watchSchool = watch("school");
 
   return (
     <div className="mx-10">
@@ -107,120 +88,158 @@ export default function Page() {
         </div>
         <div className="mb-8" />
       </div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Τίτλος</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="school"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Σχολείο</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
+      <form onSubmit={handleSubmit(onSubmit)} className="grid">
+        <Controller
+          control={control}
+          name="title"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              label="Τίτλος"
+              invalid={errors.title && true}
+              message={errors.title}
+              onChange={onChange}
+              value={value}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="school"
+          render={({ field: { onChange, value } }) => (
+            <div className="mt-5">
+              <div className="relative">
+                <label
+                  className={`absolute -top-3 text-sm left-3 bg-white peer-focus:translate-x-1 peer-focus:-translate-y-1 peer-focus:scale-90 peer-focus:opacity-75 duration-300 ${
+                    errors.school && "text-red peer-focus:opacity-100"
+                  }`}
                 >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Επιλέξτε ένα σχολείο" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {schools &&
-                      schools.map((school, index) => (
-                        <SelectItem key={index} value={school as string}>
-                          {school}
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
-                <FormDescription>
-                  Τα σχολεία σας διαχειρίζονται από την πλατφόρμα.
-                </FormDescription>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Περιγραφή</FormLabel>
-                <FormControl>
-                  <Textarea {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+                  Σχολείο
+                </label>
 
-          <FormItem>
-            <FormLabel>Αρχεία</FormLabel>
-            <FormControl>
-              <Input
-                type="file"
-                multiple
-                onChange={(e) => setFiles(e.target.files)}
-              />
-            </FormControl>
-            <FormDescription>
-              Τα αρχεία βίντεο και μεγάλα αρχεία ήχου τα ανεβάζετε{" "}
-              <Link href={"/help"} className="underline">
-                έτσι
-              </Link>
-              .
-            </FormDescription>
-          </FormItem>
-          <Collapsible className="space-y-2">
+                <Listbox
+                  as={"div"}
+                  onChange={onChange}
+                  value={value}
+                  className={"relative"}
+                >
+                  <Listbox.Button
+                    className={
+                      "border-b border-black-50 w-full focus:outline-none pt-3 pb-1 px-1 text-left"
+                    }
+                  >
+                    {watchSchool ? watchSchool : "Επιλέξτε ένα σχολείο"}
+                  </Listbox.Button>
+                  <div className="absolute -bottom-18 -mb-0.5 left-0 z-10">
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-in duration-100"
+                      leave="transition ease-in duration-100"
+                      enterFrom="-translate-y-2 opacity-0"
+                      enterTo="opacity-100"
+                      leaveFrom="opacity-100"
+                      leaveTo="-translate-y-2 opacity-0"
+                    >
+                      <Listbox.Options
+                        className={
+                          "bg-white border-b border-x border-black-50 cursor-pointer "
+                        }
+                      >
+                        {schools &&
+                          schools.map((i, key) => (
+                            <Listbox.Option
+                              key={key}
+                              value={i}
+                              className="flex border-b w-full px-4 py-2 hover:bg-slate-50 duration-300"
+                            >
+                              {i}
+                            </Listbox.Option>
+                          ))}
+                      </Listbox.Options>
+                    </Transition>
+                  </div>
+                </Listbox>
+                {errors.school && (
+                  <p className="text-red text-xs mt-0.5 ml-0.5 ">
+                    {errors.school.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+        />
+        <div className="mt-5">
+          <div className="relative">
+            <textarea
+              className={`border-b border-black-50 w-full focus:outline-none pt-3 pb-1 px-1 peer h-52 resize-none`}
+              {...register("description")}
+            />
+            <label
+              className={`absolute -top-3 text-sm left-3 bg-white peer-focus:translate-x-1 peer-focus:-translate-y-1 peer-focus:scale-90 peer-focus:opacity-75 duration-300 ${
+                errors.description && "text-red peer-focus:opacity-100"
+              }`}
+            >
+              Περιγραφή
+            </label>
+            {errors.description && (
+              <p className="text-red text-xs mt-0.5 ml-0.5">
+                {errors.description.message}
+              </p>
+            )}
+          </div>
+        </div>
+        <Input
+          type="file"
+          multiple
+          label="Αρχεία"
+          onChange={(e: any) => setFiles(e.target.files)}
+        />
+        <p className="text-xs mt-0.5 ml-0.5">
+          {" "}
+          Τα αρχεία βίντεο και μεγάλα αρχεία ήχου τα ανεβάζετε{" "}
+          <Link href={"/help"} className="underline">
+            έτσι
+          </Link>
+        </p>
+        <Disclosure>
+          <Disclosure.Button className="py-2 w-full">
             <div className="flex items-center justify-between space-x-4 px-4">
               <h4 className="text-sm font-semibold">Σύνδεσμοι</h4>
-              <CollapsibleTrigger asChild>
-                <Button variant="ghost" size="sm" className="w-9 p-0">
-                  <ChevronsUpDown className="h-4 w-4" />
-                  <span className="sr-only">Toggle</span>
-                </Button>
-              </CollapsibleTrigger>
-            </div>
-            <CollapsibleContent className="space-y-2">
-              <FormField
-                control={form.control}
+              <Button type="button" className="!px-3">
+                <ChevronsUpDown className="h-4 w-4" />
+                <span className="sr-only">Toggle</span>
+              </Button>
+            </div>{" "}
+          </Disclosure.Button>
+          <Transition
+            enter="transition duration-100 ease-out"
+            enterFrom="transform scale-95 opacity-0"
+            enterTo="transform scale-100 opacity-100"
+            leave="transition duration-75 ease-out"
+            leaveFrom="transform scale-100 opacity-100"
+            leaveTo="transform scale-95 opacity-0"
+          >
+            <Disclosure.Panel className="mx-3">
+              <Controller
+                control={control}
                 name="spotify"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Spotify</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                  </FormItem>
+                render={({ field: { onChange, value } }) => (
+                  <Input label="Spotify" onChange={onChange} value={value} />
                 )}
               />
-              <FormField
-                control={form.control}
+              <div className="h-3" />
+              <Controller
+                control={control}
                 name="youtube"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Youtube</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                  </FormItem>
+                render={({ field: { onChange, value } }) => (
+                  <Input label="Youtube" onChange={onChange} value={value} />
                 )}
               />
-            </CollapsibleContent>
-          </Collapsible>
-          <Button type="submit">Υποβολή</Button>
-        </form>
-      </Form>
+            </Disclosure.Panel>
+          </Transition>
+        </Disclosure>
+        <br />
+        <Button type="submit">Υποβολή</Button>
+      </form>
     </div>
   );
 }

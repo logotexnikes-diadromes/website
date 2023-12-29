@@ -1,11 +1,11 @@
 import { doc, deleteDoc } from "firebase/firestore";
 import { Creation } from "./types";
-import { auth, db } from "./firebase";
+import { db } from "./firebase";
 import { deleteObject } from "firebase/storage";
 
 export default function deletefunc(i: Creation) {
   return new Promise(async (resolve, reject) => {
-    if (i.files.length == 0 || !i.files) {
+    if (!i.files) {
       try {
         await deleteDoc(doc(db, "creations", i.id)).catch((e) => reject(e));
         resolve("deleted");

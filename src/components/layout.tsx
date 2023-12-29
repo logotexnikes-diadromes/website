@@ -102,6 +102,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Link href={"/help"}>
             <p>βοήθεια</p>
           </Link>
+          <Link href={"/privacy-policy"}>
+            <p>πολιτική απορρήτου</p>
+          </Link>
         </div>
       </footer>
     </ReactLenis>

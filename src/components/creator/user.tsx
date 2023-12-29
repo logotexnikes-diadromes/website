@@ -1,24 +1,17 @@
 import Image from "next/image";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
 import defaultUser from "@/app/assets/Default_pfp.png";
 import { UserInfo, signOut } from "firebase/auth";
 import { HelpCircle, LogOut } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { auth } from "@/utils/firebase";
 import { TypographyH4 } from "@/components/ui/typography";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
 import { UserIcon } from "lucide-react";
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition, Popover } from "@headlessui/react";
 import getschools from "@/utils/getschools";
 import Link from "next/link";
 import toast from "react-hot-toast";
+
 export default function User({ user }: { user: UserInfo }) {
   let [isOpen, setIsOpen] = useState(false);
   const [schools, setSchools] = useState<String[]>();
@@ -43,7 +36,7 @@ export default function User({ user }: { user: UserInfo }) {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-20" onClose={closeModal}>
+        <Dialog as="div" className="relative z-50" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -69,15 +62,16 @@ export default function User({ user }: { user: UserInfo }) {
               >
                 <Dialog.Panel className="transition-all">
                   <div
+                  
                     className={
-                      "bg-white border max-w-[500px] w-full relative z-20 rounded-lg"
+                      "bg-white max-w-lg w-full relative z-20 border border-black-50"
                     }
                   >
                     <CardHeader>
                       <CardTitle>Προφίλ</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="flex  border p-5 rounded-lg">
+                      <div className="flex border p-5 ">
                         {auth.currentUser && auth.currentUser.photoURL ? (
                           <Image
                             alt={
@@ -116,7 +110,7 @@ export default function User({ user }: { user: UserInfo }) {
                           {schools &&
                             schools.map((school, index) => (
                               <span
-                                className="mr-2 mb-2 mt-0.5 p-2 text-sm font-medium inline-block select-none bg-slate-100 rounded-md"
+                                className="mr-2 mb-2 mt-0.5 p-2 text-sm font-medium inline-block select-none border"
                                 key={index}
                               >
                                 {school}
@@ -132,8 +126,8 @@ export default function User({ user }: { user: UserInfo }) {
           </div>
         </Dialog>
       </Transition>
-      <DropdownMenu>
-        <DropdownMenuTrigger>
+      <Popover className="relative">
+        <Popover.Button>
           <Image
             alt={"εικόνα προφίλ του/ της" + user.displayName}
             src={user.photoURL ? user.photoURL : defaultUser}
@@ -141,34 +135,49 @@ export default function User({ user }: { user: UserInfo }) {
             height={40}
             className="rounded-full"
           />{" "}
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className={" w-52 relative right-10 bottom-2"}>
-          <DropdownMenuGroup>
-            <DropdownMenuItem onClick={() => setIsOpen(true)}>
+        </Popover.Button>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-200"
+          enterFrom="opacity-0 translate-y-1"
+          enterTo="opacity-100 translate-y-0"
+          leave="transition ease-in duration-150"
+          leaveFrom="opacity-100 translate-y-0"
+          leaveTo="opacity-0 translate-y-1"
+        >
+          <Popover.Panel
+            className={
+              "absolute bottom-14 right-0 bg-white border border-black-50 "
+            }
+          >
+            <button
+              className="flex border-b w-full px-4 py-2 hover:bg-slate-50 duration-300"
+              onClick={() => setIsOpen(true)}
+            >
               <UserIcon className="mr-2 h-5 w-5" />
               <span>Προφίλ</span>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <Link className="flex" href={"/help"}>
-                <HelpCircle className="mr-2 h-5 w-5" />
-                <span>Βοήθεια</span>
-              </Link>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => {
-              signOut(auth);
-              window.location.reload();
-            }}
-          >
-            <LogOut className="mr-2 h-5 w-5" />
-            <span>Αποσύνδεση</span>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+            </button>
+            <Link
+              className="flex border-b w-full px-4 py-2 hover:bg-slate-50 duration-300"
+              href={"/help"}
+              target="_blank"
+            >
+              <HelpCircle className="mr-2 h-5 w-5" />
+              <span>Βοήθεια</span>
+            </Link>
+            <button
+              className="flex border-b w-full px-4 py-2 hover:bg-slate-50 duration-300"
+              onClick={() => {
+                signOut(auth);
+                window.location.reload();
+              }}
+            >
+              <LogOut className="mr-2 h-5 w-5" />
+              Αποσύνδεση{" "}
+            </button>
+          </Popover.Panel>
+        </Transition>
+      </Popover>
     </>
   );
 }
