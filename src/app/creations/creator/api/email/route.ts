@@ -1,4 +1,3 @@
-//@ts-nocheck
 import AdmitUser from "@/components/email/admin";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
@@ -6,6 +5,11 @@ import * as admin from "firebase-admin";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import { getAuth } from "firebase-admin/auth";
 
+export async function GET() {
+  return NextResponse.json(
+    "Επικοινωνήστε μαζί μας στο info@logotexnikes-diadromes.gr"
+  );
+}
 const serviceAccount = JSON.parse(
   process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string
 );
@@ -18,12 +22,6 @@ if (admin.apps.length === 0) {
 const db = getFirestore();
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-export async function GET() {
-  return NextResponse.json(
-    "Επικοινωνήστε μαζί μας στο info@logotexnikes-diadromes.gr"
-  );
-}
-
 export async function POST(req: Request) {
   const { token } = await req.json();
   if (token) {
