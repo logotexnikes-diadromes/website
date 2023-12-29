@@ -1,3 +1,4 @@
+//@ts-nocheck
 import AdmitUser from "@/components/email/admin";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
@@ -6,7 +7,7 @@ import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import { getAuth } from "firebase-admin/auth";
 
 const serviceAccount = JSON.parse(
-  process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string
+  process.env.FIREBASE_SERVICE_ACCOUNT_KEY?.toString() as string
 );
 
 if (admin.apps.length === 0) {

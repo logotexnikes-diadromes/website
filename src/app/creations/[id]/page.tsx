@@ -78,12 +78,6 @@ export default function Page({ params }: { params: { id: string } }) {
           />
         );
       }
-    } else if (video.includes(filetype)) {
-      return (
-        <>
-          <iframe src={file}></iframe>
-        </>
-      );
     } else if (sound.includes(filetype)) {
       return <iframe className="h-5/6 w-full" src={file}></iframe>;
     } else {
