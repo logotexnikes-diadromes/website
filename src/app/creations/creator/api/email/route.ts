@@ -10,9 +10,8 @@ export async function GET() {
     "Επικοινωνήστε μαζί μας στο info@logotexnikes-diadromes.gr"
   );
 }
-const serviceAccount = JSON.parse(
-  process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string
-);
+const key = process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string;
+const serviceAccount = JSON.parse(key);
 
 if (admin.apps.length === 0) {
   admin.initializeApp({

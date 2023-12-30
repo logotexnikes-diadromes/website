@@ -47,12 +47,12 @@ export default function RootLayout({
         } else if (rawResponse.status === 208) {
           setNotified({ state: "ok", message: res.message });
         } else {
-          toast.error(res.message);
+          toast.error("Ένα άγνωστο σφάλμα προέκυψε");
           setNotified({ state: "error", message: res.message });
         }
       })
       .catch(function (error) {
-        toast.error(error.message);
+        toast.error("Ένα άγνωστο σφάλμα προέκυψε");
         setNotified({ state: "error", message: error.message });
       });
   }

@@ -6,8 +6,6 @@ import { auth } from "@/utils/firebase";
 import { Envelope, X } from "./svgs";
 import * as Tooltip from "@radix-ui/react-tooltip";
 
-
-
 export default function Processing({
   user,
   notified,
@@ -23,17 +21,15 @@ export default function Processing({
           Το αιτημά σας θα επεξεργαστεί όσο το δυνατό πιο γρήγορα!
         </CardDescription>
         <div className="flex border border-black-50 p-3">
-          <Image
-            alt={"εικόνα προφίλ του/ της" + user.displayName}
-            src={
-              user.photoURL
-                ? user.photoURL
-                : "https://via.placeholder.com/40x40"
-            }
-            width={50}
-            height={50}
-            className="rounded-full w-12 h-12"
-          />{" "}
+          {user.photoURL && (
+            <Image
+              alt={"εικόνα προφίλ του/ της" + user.displayName}
+              src={user.photoURL}
+              width={50}
+              height={50}
+              className="rounded-full w-12 h-12"
+            />
+          )}
           <div className="ml-3">
             <h1 className="text-xl font-medium">{user.displayName}</h1>
             <p className="text-sm">{user.email}</p>
@@ -111,7 +107,9 @@ export default function Processing({
                   className="TooltipContent bg-white border border-black-50 p-2 text-xs max-w-[200px] mt-1"
                   sideOffset={-100}
                 >
-                  {notified.message}
+                  {notified.state === "error"
+                    ? "Ένα άγνωστο σφάλμα προέκυψε"
+                    : notified.message}
                 </Tooltip.Content>
               </Tooltip.Portal>
             </Tooltip.Root>

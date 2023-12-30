@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "index.mts", "src/components/input.TXT", "src/app/og/opengraph-image.js", "src/app/og/route.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "index.mts", "src/components/input.TXT", "src/app/og/opengraph-image.js", "src/app/og/route.js", "src/app/providers.js"],
   "exclude": ["node_modules"]
 }
