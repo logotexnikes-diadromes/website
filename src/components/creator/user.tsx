@@ -4,7 +4,7 @@ import { UserInfo, signOut } from "firebase/auth";
 import { HelpCircle, LogOut } from "lucide-react";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { auth } from "@/utils/firebase";
-import { Fragment, useEffect, useState, useRef } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { UserIcon } from "lucide-react";
 import { Dialog, Transition, Popover } from "@headlessui/react";
 import getschools from "@/utils/getschools";

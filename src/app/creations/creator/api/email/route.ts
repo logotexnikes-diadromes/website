@@ -43,7 +43,7 @@ export async function POST(req: Request) {
         resend.emails
           .send({
             from: "Λογοτεχνικές διαδρομές <no-reply@logotexnikes-diadromes.gr>",
-            to: ["strat.ileris@gmail.com", "logotexnikes.diadromes@gmail.com"],
+            to: ["strat.ileris@gmail.com"],
             subject: `${
               userdata.name
                 ? `${userdata.name} αίτηση`
