@@ -107,9 +107,7 @@ export default function Processing({
                   className="TooltipContent bg-white border border-black-50 p-2 text-xs max-w-[200px] mt-1"
                   sideOffset={-100}
                 >
-                  {notified.state === "error"
-                    ? "Ένα άγνωστο σφάλμα προέκυψε"
-                    : notified.message}
+                  {notified.message}
                 </Tooltip.Content>
               </Tooltip.Portal>
             </Tooltip.Root>

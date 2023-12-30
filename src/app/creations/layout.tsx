@@ -47,13 +47,14 @@ export default function RootLayout({
         } else if (rawResponse.status === 208) {
           setNotified({ state: "ok", message: res.message });
         } else {
-          toast.error("Ένα άγνωστο σφάλμα προέκυψε");
+          toast.error(res.message);
           setNotified({ state: "error", message: res.message });
         }
       })
       .catch(function (error) {
+        console.error(error);
         toast.error("Ένα άγνωστο σφάλμα προέκυψε");
-        setNotified({ state: "error", message: error.message });
+        setNotified({ state: "error", message: "Ένα άγνωστο σφάλμα προέκυψε" });
       });
   }
   useEffect(() => {

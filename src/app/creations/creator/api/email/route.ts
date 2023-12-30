@@ -39,29 +39,26 @@ export async function POST(req: Request) {
         const mm = String(today.getMonth() + 1).padStart(2, "0");
         const yyyy = today.getFullYear();
         const date = dd + "/" + mm + "/" + yyyy;
-        resend.emails
-          .send({
-            from: "Λογοτεχνικές διαδρομές <no-reply@logotexnikes-diadromes.gr>",
-            to: ["strat.ileris@gmail.com"],
-            subject: `${
-              userdata.name
-                ? `${userdata.name} αίτηση`
-                : `${userdata.email} αίτηση`
-            }`,
-            react: AdmitUser(
-              {
-                email: userdata.email,
-                name: userdata.name,
-                photoURL: userdata.photoURL,
-              },
-              date
-            ),
-          })
-          .then(async () => {
-            await ref.update({
-              reqEmail: FieldValue.serverTimestamp(),
-            });
-          });
+        resend.emails.send({
+          from: "Λογοτεχνικές διαδρομές <no-reply@logotexnikes-diadromes.gr>",
+          to: ["strat.ileris@gmail.com"],
+          subject: `${
+            userdata.name
+              ? `${userdata.name} αίτηση`
+              : `${userdata.email} αίτηση`
+          }`,
+          react: AdmitUser(
+            {
+              email: userdata.email,
+              name: userdata.name,
+              photoURL: userdata.photoURL,
+            },
+            date
+          ),
+        });
+        await ref.update({
+          reqEmail: FieldValue.serverTimestamp(),
+        });
         return NextResponse.json({
           message: "Έχουμε ειδοποιηθεί για την αίτησή σας",
         });
