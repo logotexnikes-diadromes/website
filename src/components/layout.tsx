@@ -84,27 +84,35 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
       <div className="mb-[70px] max-sm:mb-[95px]" />
       {children}
-      <footer className="border-t border-black-50 sm:p-10 p-6 md:flex mt-10">
-        <div className="md:w-1/2 grid md:mr-5 max-md:mb-5">
-          <h2 className="w-2/3 max-w-[300px] my-auto select-none font-semibold">
-            Λογοτεχνικές διαδρομές στην Ιστορία
-          </h2>
-        </div>
-        <div>
-          {menuitems.map((item, key) => (
-            <Link key={key} href={item.link}>
-              <p>{item.text}</p>
+      <footer>
+        <div className="border-t border-black-50 sm:p-10 p-6 md:flex mt-10">
+          <div className="md:w-1/2 grid md:mr-5 max-md:mb-5">
+            <h2 className="w-2/3 max-w-[300px] my-auto select-none font-semibold">
+              Λογοτεχνικές διαδρομές στην Ιστορία
+            </h2>
+          </div>
+          <div>
+            {menuitems.slice(0, 4).map((item, key) => (
+              <Link key={key} href={item.link}>
+                <p>{item.text}</p>
+              </Link>
+            ))}
+            <Link href={"/creations/creator"}>
+              <p className="pl-3">υποβολή εργασιών</p>
             </Link>
-          ))}
-          <Link href={"/creations/creator"}>
-            <p className="pl-3">υποβολή εργασιών</p>
-          </Link>
-          <Link href={"/help"}>
-            <p>βοήθεια</p>
-          </Link>
-          <Link href={"/privacy-policy"}>
-            <p>πολιτική απορρήτου</p>
-          </Link>
+            <Link href={"/contact"}>
+              <p>επικοινωνία</p>
+            </Link>
+            <Link href={"/help"}>
+              <p>βοήθεια</p>
+            </Link>
+            <Link href={"/privacy-policy"}>
+              <p>πολιτική απορρήτου</p>
+            </Link>
+          </div>
+        </div>
+        <div className="border-t border-black-50 py-2 text-center text-xs">
+          © λογοτεχνικές διαδρομές {new Date().getFullYear()}
         </div>
       </footer>
     </ReactLenis>
