@@ -10,12 +10,11 @@ export async function GET() {
     "Επικοινωνήστε μαζί μας στο info@logotexnikes-diadromes.gr"
   );
 }
-const key = JSON.stringify(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
-const serviceAccount = JSON.parse(key);
+const key = process.env.FIREBASE_SERVICE_ACCOUNT_KEY?.toString() as string;
 
 if (admin.apps.length === 0) {
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert(JSON.parse(key)),
   });
 }
 const db = getFirestore();
