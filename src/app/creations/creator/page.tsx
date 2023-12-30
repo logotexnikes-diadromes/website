@@ -33,7 +33,7 @@ export default function Page() {
         setData(creations);
         setLoading(false);
       } else {
-        setLoading(true);
+        setLoading(false);
       }
     });
   }, []);

@@ -119,7 +119,7 @@ export default function Page() {
       <Transition appear show={open} as={Fragment}>
         <Dialog
           as="div"
-          className="relative z-20"
+          className="relative z-50"
           onClose={() => setOpen(false)}
         >
           <Transition.Child

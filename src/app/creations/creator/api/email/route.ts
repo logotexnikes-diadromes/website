@@ -13,7 +13,6 @@ export async function GET() {
 const key = process.env.FIREBASE_SERVICE_ACCOUNT_KEY?.toString() as string;
 
 if (admin.apps.length === 0) {
-  console.log("Auth key:  " + key);
   admin.initializeApp({
     credential: admin.credential.cert(JSON.parse(key)),
   });
