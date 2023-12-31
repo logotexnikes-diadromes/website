@@ -10,7 +10,7 @@ const font = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "λογοτεχνικές διαδρομές",
+  title: "Λογοτεχνικές διαδρομές",
   description: `ετήσιο πρόγραμμα φιλαναγνωσίας`,
 };
 

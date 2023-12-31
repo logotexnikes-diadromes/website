@@ -1,5 +1,5 @@
 "use client";
-import { Detail, H1, H2, H3Small } from "@/components/typography";
+import { Detail, H1, H2 } from "@/components/typography";
 import { Fragment, useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/utils/firebase";

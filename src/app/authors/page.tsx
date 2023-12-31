@@ -1,4 +1,4 @@
-import { Detail, H1, H2 } from "@/components/typography";
+import { Detail, H1, H3 } from "@/components/typography";
 import Image from "next/image";
 export default function Page() {
   return (
@@ -25,17 +25,17 @@ export default function Page() {
             height={9999}
           />{" "}
           <div>
-            <H2>{"Άλκη Ζέη"}</H2>
+            <H3>{"Άλκη Ζέη"}</H3>
           </div>
         </div>
         <div className="flex space-x-5 border-y my-3 p-3 border-y-black-50 w-full">
           <div className="mr-0 ml-auto items-end flex">
-            <H2>{"Ζωρζ Σαρή"}</H2>
+            <H3>{"Ζωρζ Σαρή"}</H3>
           </div>
           <Image
             className="w-2/5 aspect-square object-cover mr-0 ml-auto"
             alt={"Ζωρζ Σαρή"}
-            src={"/authors/2.webp"}
+            src={"/authors/6.jpg"}
             width={9999}
             height={9999}
           />{" "}
@@ -47,17 +47,17 @@ export default function Page() {
           <Image
             className="w-2/5 aspect-square object-cover"
             alt={"Αλεξάνδρα Μητσιάλη"}
-            src={"/authors/3.jpg"}
+            src={"/authors/5.jpg"}
             width={9999}
             height={9999}
           />{" "}
           <div>
-            <H2>{"Αλεξάνδρα Μητσιάλη"}</H2>
+            <H3>{"Αλεξάνδρα Μητσιάλη"}</H3>
           </div>
         </div>
         <div className="flex space-x-5 border-y my-3 p-3 border-y-black-50 w-full">
           <div className="mr-0 ml-auto items-end flex text-right">
-            <H2>{"Λότη Πέτροβιτς Ανδρουτσοπούλου"}</H2>
+            <H3 className="max-sm:text-lg">{"Λότη Πέτροβιτς Ανδρουτσοπούλου"}</H3>
           </div>
           <Image
             className="w-2/5 aspect-square object-cover mr-0 ml-auto"
@@ -73,22 +73,22 @@ export default function Page() {
           <Image
             className="w-2/5 aspect-square object-cover"
             alt={"Αγγελική Δαρλάση"}
-            src={"/authors/5.jpg"}
+            src={"/authors/2.webp"}
             width={9999}
             height={9999}
           />{" "}
           <div>
-            <H2>{"Αγγελική Δαρλάση"}</H2>
+            <H3>{"Αγγελική Δαρλάση"}</H3>
           </div>
         </div>
         <div className="flex space-x-5 border-y my-3 p-3 border-y-black-50 w-full">
           <div className="mr-0 ml-auto items-end flex text-right">
-            <H2>{"Κέλλυ Ματάθια Κόβο"}</H2>
+            <H3>{"Κέλλυ Ματάθια Κόβο"}</H3>
           </div>
           <Image
             className="w-2/5 aspect-square object-cover mr-0 ml-auto"
             alt={"Κέλλυ Ματάθια Κόβο"}
-            src={"/authors/6.jpg"}
+            src={"/authors/3.jpg"}
             width={9999}
             height={9999}
           />{" "}

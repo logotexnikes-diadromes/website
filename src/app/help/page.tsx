@@ -1,6 +1,9 @@
 import { H1, H2 } from "@/components/typography";
+import type { Metadata } from "next";
 import Link from "next/link";
-
+export const metadata: Metadata = {
+  title: "Βοήθεια | Λογοτεχνικές Διαδρομές",
+};
 export default function Page() {
   const links = [
     {

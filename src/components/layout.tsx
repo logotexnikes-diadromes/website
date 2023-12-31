@@ -39,7 +39,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           href={"/"}
           className="w-2/3 max-w-[300px] my-auto select-none font-semibold text-red"
         >
-          Λογοτεχνικές διαδρομές στην Ιστορία
+          Λογοτεχνικές διαδρομές στην ιστορία
         </Link>
         <button
           onClick={() => setOpen(!open)}
@@ -87,8 +87,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <footer>
         <div className="border-t border-black-50 sm:p-10 p-6 md:flex mt-10">
           <div className="md:w-1/2 grid md:mr-5 max-md:mb-5">
-            <h2 className="w-2/3 max-w-[300px] my-auto select-none font-semibold">
-              Λογοτεχνικές διαδρομές στην Ιστορία
+            <h2 className="w-2/3 max-w-[300px] my-auto select-none font-semibold text-red">
+              Λογοτεχνικές διαδρομές στην ιστορία
             </h2>
           </div>
           <div>

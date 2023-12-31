@@ -1,11 +1,10 @@
 "use client";
-import { H1, H2, H3 } from "@/components/typography";
+import { H1, H3 } from "@/components/typography";
 import { getAnnouncements } from "../../../sanity/sanity-utils";
 import "./style.css";
 import { useEffect, useState } from "react";
 //@ts-ignore
 import BlockContent from "@sanity/block-content-to-react";
-import Image from "next/image";
 interface Announcement {
   title: string;
   content: any;

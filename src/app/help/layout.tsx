@@ -89,7 +89,7 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
                   target="_blank"
                   className="bg-white relative font-medium mt-2"
                 >
-                  Απευθυνθείτε στο τεχνικό μας τμήμα
+                  Απευθυνθείτε στην τεχνική υποστήριξη
                 </Link>
               </div>
             </div>
