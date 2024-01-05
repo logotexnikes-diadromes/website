@@ -92,7 +92,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </h2>
           </div>
           <div>
-            {menuitems.slice(0, 4).map((item, key) => (
+            {menuitems.slice(0, 5).map((item, key) => (
               <Link key={key} href={item.link}>
                 <p>{item.text}</p>
               </Link>

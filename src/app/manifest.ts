@@ -2,9 +2,9 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "λογοτεχνικές διαδρομές",
-    short_name: "λογοτεχνικές διαδρομές",
-    description: "Next.js App",
+    name: "Λογοτεχνικές διαδρομές στην ιστορία",
+    short_name: "Λογοτεχνικές διαδρομές",
+    description: "ετήσιο πρόγραμμα φιλαναγνωσίας",
     start_url: "/",
     display: "standalone",
     background_color: "#fff",

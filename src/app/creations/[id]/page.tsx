@@ -1,42 +1,37 @@
 "use client";
 import Image from "next/image";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { H2, H3 } from "@/components/typography";
 import Link from "next/link";
 import Button from "@/components/button";
 import { Dialog, Transition } from "@headlessui/react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/utils/firebase";
+import { ScrollTrigger, gsap } from "gsap/all";
+import { X } from "@/components/creator/svgs";
+import ReactPlayer from "react-player";
 
 interface Creation {
   title: string;
   description: string;
   school: string;
-  createdAt: Date;
+  createdAt: string;
   spotify: string;
   youtube: string;
   fileURLS: string[];
   createdBy: string;
 }
-interface dimensions {
-  width: number;
-  height: number;
-}
 
 export default function Page({ params }: { params: { id: string } }) {
   const [data, setData] = useState<Creation | null>(null);
   const [exists, setExists] = useState<boolean>(true);
-  const [screen, setScreen] = useState<dimensions | null>(null);
   const [content, setContent] = useState<any>();
   let [isOpen, setIsOpen] = useState(false);
+
   function closeModal() {
     setIsOpen(false);
   }
   useEffect(() => {
-    setScreen({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
     const docRef = doc(db, "creations", decodeURI(params.id));
     getDoc(docRef).then((r) => {
       if (r.exists()) {
@@ -48,63 +43,165 @@ export default function Page({ params }: { params: { id: string } }) {
     });
   }, []);
 
-  function Media({ file, screen }: { file: string; screen: dimensions }) {
+  function Media({ file }: { file: string }) {
     const clr = file.split("?")[0].split(".");
     const filetype = clr[clr.length - 1];
     const image = ["jpg", "png", "webp", "avif", "gif", "jpeg"];
-    const video = ["mp4", "mov", "avi", "wmv", "flv", "webm"];
     const sound = ["mp3", "aac", "ogg", "flac", "alac", "wav"];
     if (image.includes(filetype)) {
       if (screen) {
         return (
           <Image
-            width={screen?.width}
-            height={screen?.height}
+            width={999}
+            height={999}
             src={file}
             alt=""
             onClick={() => {
               setIsOpen(true);
               setContent(
                 <Image
-                  width={screen?.width}
-                  height={screen?.height}
+                  width={999}
+                  height={999}
                   src={file}
                   alt=""
                   className=" max-h-[80vh] w-auto"
                 />
               );
             }}
-            className="object-cover h-16 hover:h-20 duration-300 ease-out w-full"
+            className="object-cover aspect-square p-2 col-"
           />
         );
       }
     } else if (sound.includes(filetype)) {
-      return <iframe className="h-5/6 w-full" src={file}></iframe>;
+      return (
+        <div
+          onClick={() => {
+            setIsOpen(true);
+            setContent(
+              <ReactPlayer
+                controls
+                url={file}
+                height={80}
+                style={{ marginBottom: 8 }}
+              />
+            );
+          }}
+          className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-center"
+        >
+          <div className="w-full">
+            <H3 className="mb-3">Αρχείο ήχου</H3>
+          </div>
+        </div>
+      );
     } else {
       return (
-        <div className="flex sm:px-10 px-6 border-y border-black-50 py-3 hover:py-5 duration-300 ease-out w-full">
-          <H3>Αρχείο {filetype}</H3>
-          <Link href={file} target="_blank" className="mr-0 ml-auto">
-            <Button>Λήψη</Button>
-          </Link>
+        <div className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-center">
+          <div className="w-full">
+            <H3 className="mb-3">Αρχείο {filetype}</H3>
+            <Link href={file} target="_blank">
+              <Button>Λήψη</Button>
+            </Link>
+          </div>
         </div>
       );
     }
   }
-  function date(date: Date) {
-    const d = new Date(date);
-    const month = d.getMonth() + 1;
-    const day = d.getDate();
-    const year = d.getFullYear();
-    return day + "/" + month + "/" + year;
-  }
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to(".hero", {
+      scrollTrigger: {
+        trigger: "#gallery",
+        scrub: true,
+        start: "top 70%",
+        end: "top center",
+      },
+      opacity: 0,
+    });
+    gsap.from("#gallery", {
+      scrollTrigger: {
+        trigger: "#gallery",
+        scrub: true,
+        start: "top center",
+        end: "top 10%",
+      },
+      opacity: 0,
+    });
+  }, [data]);
   return (
     <div className="min-h-screen">
       {exists ? (
         data && (
           <>
+            <section className="fixed -z-20 grid h-[92vh] md:grid-cols-2 place-items-center sm:mx-10 mx-6 hero">
+              <div>
+                <H2 className="text-red">{data.title}</H2>
+                <div className="flex space-x-3">
+                  <p className="opacity-50">{data.school}</p>
+                  <p>|</p>
+                  <p className="opacity-50">{data.createdAt}</p>
+                </div>
+                <div className="mb-5 mt-2 border-b border-b-black" />
+                <p>{data.description}</p>
+              </div>
+              <div className="md:p-10">
+                {data.fileURLS &&
+                  data.fileURLS
+                    .map((file) => {
+                      const type = file.split(".").pop()?.split("?")[0];
+                      if (type === "jpg" || type === "png" || type === "webp") {
+                        return (
+                          <Image
+                            width={999}
+                            height={999}
+                            key={file}
+                            src={file}
+                            alt=""
+                            className="object-cover mb-2 md:max-h-[60vh] max-h-[40vh] w-auto scale-90 rounded-lg"
+                          />
+                        );
+                      }
+                      return null;
+                    })
+                    .find(Boolean)}
+              </div>
+            </section>
+            <div className="pb-[92vh] h-2" />
+            <section className="min-h-screen">
+              <div
+                className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 sm:mx-10 mx-6"
+                id="gallery"
+              >
+                {data.fileURLS &&
+                  data.fileURLS.map((i, key) => <Media key={key} file={i} />)}
+                {data.youtube && (
+                  <Link
+                    href={data.youtube}
+                    className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-center"
+                    target="_blank"
+                  >
+                    <H3 className="w-full">Youtube</H3>
+                  </Link>
+                )}
+                {data.spotify && (
+                  <div
+                    onClick={() => {
+                      setIsOpen(true);
+                      setContent(
+                        <iframe
+                          className="w-[80vw] max-w-md h-[352px]"
+                          src={data.spotify}
+                        ></iframe>
+                      );
+                    }}
+                    className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-center"
+                  >
+                    <H3 className="w-full">Spotify</H3>
+                  </div>
+                )}
+              </div>
+            </section>
             <Transition appear show={isOpen} as={Fragment}>
-              <Dialog as="div" className="relative z-20" onClose={closeModal}>
+              <Dialog as="div" className="relative z-50" onClose={closeModal}>
                 <Transition.Child
                   as={Fragment}
                   enter="ease-out duration-300"
@@ -114,72 +211,35 @@ export default function Page({ params }: { params: { id: string } }) {
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <div className="fixed inset-0 bg-black/75" />
+                  <div className="fixed inset-0 bg-white" />
                 </Transition.Child>
 
                 <div className="fixed inset-0 overflow-y-auto">
                   <div className="flex min-h-full items-center justify-center p-5">
-                    <Transition.Child
-                      as={Fragment}
-                      enter="ease-out duration-300"
-                      enterFrom="opacity-0 scale-95"
-                      enterTo="opacity-100 scale-100"
-                      leave="ease-in duration-200"
-                      leaveFrom="opacity-100 scale-100"
-                      leaveTo="opacity-0 scale-95"
-                    >
-                      <Dialog.Panel className="shadow-xl h-fit transition-all">
-                        {content}
-                      </Dialog.Panel>
-                    </Transition.Child>
+                    <>
+                      <span className="w-6 h-6 absolute top-10 right-10 cursor-pointer">
+                        <X />
+                      </span>
+                      <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0 scale-95"
+                        enterTo="opacity-100 scale-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100 scale-100"
+                        leaveTo="opacity-0 scale-95"
+                      >
+                        <Dialog.Panel className={"relative"}>
+                          {content}
+                          <p className="mt-1 text-sm">{data.title}</p>
+                          <p className="opacity-50 text-sm">{data.school}</p>
+                        </Dialog.Panel>
+                      </Transition.Child>
+                    </>
                   </div>
                 </div>
               </Dialog>
             </Transition>
-            <div className="grid min-h-[65vh]">
-              <div className="place-self-center md:w-2/3 mb-8 sm:mx-10 mx-6">
-                <H2 className="text-red">{data.title}</H2>
-                <div className="flex space-x-3">
-                  <p className="opacity-50">{data.school}</p>
-                  <p>|</p>
-                  <p className="opacity-50">{date(data.createdAt)}</p>
-                </div>
-                <div className="mb-5 mt-2 border-b border-b-black" />
-                <p>{data.description}</p>
-              </div>
-            </div>
-            <section className="h-[85vh]">
-              <H3 className="sm:px-10 px-6 border-b py-3 border-black-50 mb-5">
-                Συλλογή
-              </H3>
-              {data.youtube && (
-                <div className="sm:px-10 px-6 border-y border-black-50 py-3 hover:py-5 duration-300 ease-out w-full">
-                  <Link href={data.youtube}>
-                    <H3>Youtube</H3>
-                  </Link>
-                </div>
-              )}
-              {data.spotify && (
-                <div
-                  onClick={() => {
-                    setIsOpen(true);
-                    setContent(
-                      <iframe
-                        className="w-[80vw] max-w-md h-[352px]"
-                        src={data.spotify}
-                      ></iframe>
-                    );
-                  }}
-                  className="sm:px-10 px-6 border-y border-black-50 py-3 hover:py-5 duration-300 ease-out w-full"
-                >
-                  <H3>Spotify</H3>
-                </div>
-              )}
-              {data.fileURLS &&
-                data.fileURLS.map((i, key) => (
-                  <Media key={key} file={i} screen={screen!} />
-                ))}
-            </section>
           </>
         )
       ) : (

@@ -4,13 +4,12 @@ import "./globals.css";
 import Layout from "@/components/layout";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import Button from "@/components/button";
 const font = JetBrains_Mono({
   subsets: ["latin", "greek"],
 });
 
 export const metadata: Metadata = {
-  title: "Λογοτεχνικές διαδρομές",
+  title: "Λογοτεχνικές διαδρομές στην ιστορία",
   description: `ετήσιο πρόγραμμα φιλαναγνωσίας`,
 };
 

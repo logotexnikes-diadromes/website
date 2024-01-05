@@ -1,5 +1,5 @@
 "use client";
-import { Detail, H1, H2 } from "@/components/typography";
+import { Detail, H1, H2, H3 } from "@/components/typography";
 import { Fragment, useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/utils/firebase";
@@ -7,6 +7,8 @@ import Fuse from "fuse.js";
 import Link from "next/link";
 import { Dialog, Transition } from "@headlessui/react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
+import { Search } from "@/components/creator/svgs";
 interface Creation {
   title: string;
   fileURLS: string[];
@@ -15,7 +17,7 @@ interface Creation {
   school: string;
   description: string;
   id: string;
-  createdAt: Date;
+  createdAt: string;
 }
 interface FuseCreation {
   item: Creation;
@@ -27,7 +29,6 @@ export default function Page() {
   const [creations, setCreations] = useState<Creation[] | null>(null);
   const [open, setOpen] = useState<boolean>(false);
   const [results, setResults] = useState<FuseCreation[] | null>(null);
-
   const searchParams = useSearchParams();
   const search = searchParams.get("s") as string;
 
@@ -41,7 +42,7 @@ export default function Page() {
         creations.push(data);
       });
       if (creations.length > 0) {
-        setCreations(creations);
+        setCreations(creations.reverse());
         setResults(null);
       } else {
         setExists(false);
@@ -65,55 +66,16 @@ export default function Page() {
       }
     }
   }, [search]);
-
-  function date(date: Date) {
-    const d = new Date(date);
-    const month = d.getMonth() + 1;
-    const day = d.getDate();
-    const year = d.getFullYear();
-    return day + "/" + month + "/" + year;
-  }
   return (
     <div className="sm:mx-10 mx-6">
       <div className="flex">
         <H1 className={`mb-8`}>Aναρτημένες δημιουγίες</H1>
-        <svg
+        <span
           onClick={() => setOpen(true)}
           className="w-6 h-6 mr-0 ml-auto self-center"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 214.61 205.11"
         >
-          <defs>
-            <style>
-              {`
-      .cls-1, .cls-2 {
-        fill: #00000090;
-        stroke-width: 0px;
-      }
-
-      .cls-2, .cls-3 {
-        fill: #fff;
-      }
-
-      .cls-3 {
-        stroke: #00000090;
-        stroke-miterlimit: 10;
-        stroke-width: 8px;
-      }`}
-            </style>
-          </defs>
-          <g>
-            <path
-              className="cls-2"
-              d="m145.02,138c-16.47,0-32.3-6.03-44.58-16.98-14.25-12.71-22.42-30.94-22.42-50.02,0-36.94,30.06-67,67-67s67,30.06,67,67-30.06,67-67,67Z"
-            />
-            <path
-              className="cls-1"
-              d="m145.02,8c34.74,0,63,28.26,63,63s-28.26,63-63,63c-15.49,0-30.37-5.67-41.92-15.97-13.4-11.95-21.08-29.09-21.08-47.03,0-34.74,28.26-63,63-63m0-8c-39.21,0-71,31.79-71,71,0,21.07,9.18,40,23.76,53,12.55,11.19,29.1,18,47.24,18,39.21,0,71-31.79,71-71S184.23,0,145.02,0h0Z"
-            />
-          </g>
-          <line className="cls-3" x1="89.8" y1="115.31" x2="1.41" y2="203.69" />
-        </svg>
+          <Search />
+        </span>
       </div>
 
       <Transition appear show={open} as={Fragment}>
@@ -161,42 +123,54 @@ export default function Page() {
                       }
                     ></input>
                     <div className="space-y-3 grid my-auto overflow-y-auto overflow-x-hidden max-h-64">
-                      {results
-                        ? results.map((i, key) => (
+                      {results ? (
+                        <>
+                          <Link
+                            className="border-b group border-black-50 my-1 flex flex-col p-2 "
+                            href={"/creations/" + results[0].item.id}
+                          >
+                            <p>{results[0].item.title}</p>
+                            <div className="flex mb-0 mt-auto">
+                              <p className="opacity-50">
+                                {results[0].item.school}
+                              </p>
+                              <p className="opacity-50 ml-auto">
+                                {results[0].item.createdAt}
+                              </p>
+                            </div>
+                          </Link>
+
+                          {results.map((i, key) => (
                             <Link
                               key={key}
+                              style={{ display: key === 0 ? "none" : "block" }}
                               className="border-b group border-black-50 my-1 flex flex-col p-2 "
                               href={"/creations/" + i.item.id}
                             >
                               <p>{i.item.title}</p>
-                              {results.length < 4 && (
-                                <div className="flex mb-0 mt-auto">
-                                  <p className="opacity-50">{i.item.school}</p>
-                                  <p className="opacity-50 ml-auto">
-                                    {date(i.item.createdAt)}
-                                  </p>
-                                </div>
-                              )}
                             </Link>
-                          ))
-                        : search !== "" && (
-                            <Transition
-                              appear
-                              show={search !== ""}
-                              enter="ease-out duration-700 delay-300"
-                              leave="ease-in duration-700 delay-300"
-                              enterFrom="opacity-0 -translate-x-2"
-                              enterTo="opacity-100 translate-x-0"
-                              leaveFrom="opacity-100 translate-x-0"
-                              leaveTo="opacity-0 -translate-x-2"
-                            >
-                              <div className="grid h-64">
-                                <Detail className="place-self-center">
-                                  κανένα αποτέλεσμα
-                                </Detail>
-                              </div>
-                            </Transition>
-                          )}
+                          ))}
+                        </>
+                      ) : (
+                        search !== "" && (
+                          <Transition
+                            appear
+                            show={search !== ""}
+                            enter="ease-out duration-700 delay-300"
+                            leave="ease-in duration-700 delay-300"
+                            enterFrom="opacity-0 -translate-x-2"
+                            enterTo="opacity-100 translate-x-0"
+                            leaveFrom="opacity-100 translate-x-0"
+                            leaveTo="opacity-0 -translate-x-2"
+                          >
+                            <div className="grid h-64">
+                              <Detail className="place-self-center">
+                                κανένα αποτέλεσμα
+                              </Detail>
+                            </div>
+                          </Transition>
+                        )
+                      )}
                     </div>
                   </div>
                 </Dialog.Panel>
@@ -206,21 +180,21 @@ export default function Page() {
         </Dialog>
       </Transition>
 
-      <div
-        className={`grid max-sm:grid-cols-1 grid-cols-2 2xl:grid-cols-3 gap-2`}
-      >
+      <div className={`grid sm:grid-cols-2 2xl:grid-cols-3 sm:gap-7 gap-3`}>
         {exists ? (
           creations &&
           creations.map((i, key) => (
             <Link
               key={key}
-              className="border-b group border-black-50 my-1 flex flex-col p-2"
+              className="flex flex-col border py-3 border-black-50 relative bg-white group"
               href={"/creations/" + i.id}
             >
-              <p>{i.title}</p>
-              <div className="flex mb-0 mt-auto">
+              <div className="w-full h-full absolute top-0 left-0 -z-10 border border-black-50 group-hover:-translate-x-2 group-hover:translate-y-1 duration-300" />
+
+              <p className="px-3">{i.title}</p>
+              <div className="flex mb-0 mt-auto pt-2 text-sm px-3">
                 <p className="opacity-50">{i.school}</p>
-                <p className="opacity-50 ml-auto">{date(i.createdAt)}</p>
+                <p className="opacity-50 ml-auto">{i.createdAt}</p>
               </div>
             </Link>
           ))

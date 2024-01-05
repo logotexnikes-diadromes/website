@@ -24,6 +24,7 @@ const formSchema = z.object({
 
 export default function Page() {
   const [files, setFiles] = useState<null | FileList>(null);
+  const [cover, setCover] = useState<null | File>(null);
   const [schools, setSchools] = useState<String[] | null>(null);
   const {
     register,

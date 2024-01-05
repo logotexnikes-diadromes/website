@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -43,7 +43,7 @@
     "firebase-admin": "^12.0.0",
     "framer-motion": "^10.16.16",
     "fuse.js": "^7.0.0",
-    "gsap": "^3.12.2",
+    "gsap": "^3.12.4",
     "lodash": "^4.17.21",
     "lucide-react": "^0.293.0",
     "media-icons": "^0.10.0",
@@ -56,6 +56,7 @@
     "react-hook-form": "^7.48.2",
     "react-hot-toast": "^2.4.1",
     "react-lite-youtube-embed": "^2.4.0",
+    "react-player": "^2.14.1",
     "request-ip": "^3.3.0",
     "resend": "^2.0.0",
     "sanity": "^3.20.2",
@@ -79,6 +80,9 @@
     "npm": "^10.2.4",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "sst": "^2.39.2",
+    "aws-cdk-lib": "2.110.1",
+    "constructs": "10.3.0"
   }
 }
