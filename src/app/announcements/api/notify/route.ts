@@ -19,8 +19,10 @@ export async function POST(req: Request) {
     if (content && _createdAt && content) {
       resend.emails.send({
         from: "Λογοτεχνικές διαδρομές <no-reply@logotexnikes-diadromes.gr>",
-        to: recipeients,
-        subject: `τεστ`,
+        bcc: recipeients,
+        to: "info@logotexnikes-diadromes.gr",
+        reply_to: "info@logotexnikes-diadromes.gr",
+        subject: `Ανακοίνωση: ${title}`,
         react: Announcement(title, _createdAt, JSON.stringify(content)),
       });
       return NextResponse.json({ message: "Notified all users", ok: true });
