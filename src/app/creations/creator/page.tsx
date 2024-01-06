@@ -152,6 +152,7 @@ export default function Page() {
         <Transition appear show={isOpen} as={"div"}>
           {ditem && data && (
             <Dialog
+              open={isOpen}
               as="div"
               className="relative z-50"
               onClose={() => setIsOpen(false)}

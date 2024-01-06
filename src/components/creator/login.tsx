@@ -27,14 +27,6 @@ export default function Login() {
           Σύνδεση
         </Button>
       </div>
-      <p className="absolute bottom-0 text-xs sm:mx-10 mx-6 text-center">
-        Με την σύνδεσή σας δηλώνετε ότι συμφωνείτε με την{" "}
-        <Link className="underline" href={"/privacy-policy"} target="_blank">
-          {" "}
-          πολιτική απορρήτου
-        </Link>{" "}
-        μας
-      </p>
     </div>
   );
 }

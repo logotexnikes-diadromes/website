@@ -36,12 +36,6 @@ export default function Page() {
             2463055179
           </Link>
         </div>
-        <div className="mt-5">
-          <Detail>Αίτηση συμμετοχής</Detail>
-          <Link href={"/docs/aithsh_symmetoxhs.docx"} className="text-red">
-            Λήψη
-          </Link>
-        </div>
       </div>
 
       <Detail className="mt-10 sm:mx-10 mx-5 mb-2">Υποστήριξη</Detail>
