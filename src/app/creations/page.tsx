@@ -69,7 +69,7 @@ export default function Page() {
   return (
     <div className="sm:mx-10 mx-6">
       <div className="flex">
-        <H1 className={`mb-8`}>Aναρτημένες δημιουγίες</H1>
+        <H1 className={`mb-8`}>Aναρτημένες δημιουργίες</H1>
         <span
           onClick={() => setOpen(true)}
           className="w-6 h-6 mr-0 ml-auto self-center"
