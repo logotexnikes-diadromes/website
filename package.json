@@ -14,6 +14,7 @@
     "@mdx-js/loader": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
     "@next/mdx": "^14.0.4",
+    "@portabletext/to-html": "^2.0.5",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-collapsible": "^1.0.3",
     "@radix-ui/react-context-menu": "^2.1.5",
@@ -74,15 +75,15 @@
     "@types/react-dom": "^18",
     "@types/uuid": "^9.0.7",
     "autoprefixer": "^10.0.1",
+    "aws-cdk-lib": "2.110.1",
+    "constructs": "10.3.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
     "install": "^0.13.0",
     "npm": "^10.2.4",
     "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5",
     "sst": "^2.39.2",
-    "aws-cdk-lib": "2.110.1",
-    "constructs": "10.3.0"
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
   }
 }
