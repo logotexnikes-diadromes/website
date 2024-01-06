@@ -16,7 +16,7 @@ export default function Page() {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<Creation[] | null>(null);
   let [isOpen, setIsOpen] = useState(false);
-  const [ditem, setDitem] = useState<number | null>(null);
+  const [ditem, setDitem] = useState<Creation | null>(null);
   useEffect(() => {
     const q = query(
       collection(db, "creations"),
@@ -92,7 +92,7 @@ export default function Page() {
                       <button
                         onClick={() => {
                           setIsOpen(true);
-                          setDitem(key);
+                          setDitem(creation);
                         }}
                         className="flex border-b w-full px-4 py-2 hover:bg-slate-50 duration-300"
                       >
@@ -150,62 +150,60 @@ export default function Page() {
         <div className="mb-8" />
         {loader()}
         <Transition appear show={isOpen} as={"div"}>
-          {ditem && data && (
-            <Dialog
-              open={isOpen}
-              as="div"
-              className="relative z-50"
-              onClose={() => setIsOpen(false)}
+          <Dialog
+            open={isOpen}
+            as="div"
+            className="relative z-50"
+            onClose={() => setIsOpen(false)}
+          >
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
             >
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <div className="fixed inset-0 bg-black/25" />
-              </Transition.Child>
+              <div className="fixed inset-0 bg-black/25" />
+            </Transition.Child>
 
-              <div className="fixed inset-0 overflow-y-auto">
-                <div className="flex min-h-full items-center justify-center p-4 text-center">
-                  <Transition.Child
-                    as={Fragment}
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0 scale-95"
-                    enterTo="opacity-100 scale-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100 scale-100"
-                    leaveTo="opacity-0 scale-95"
+            <div className="fixed inset-0 overflow-y-auto">
+              <div className="flex min-h-full items-center justify-center p-4 text-center">
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-out duration-300"
+                  enterFrom="opacity-0 scale-95"
+                  enterTo="opacity-100 scale-100"
+                  leave="ease-in duration-200"
+                  leaveFrom="opacity-100 scale-100"
+                  leaveTo="opacity-0 scale-95"
+                >
+                  <Dialog.Panel
+                    className={
+                      "bg-white text-left max-w-lg w-full relative z-20 border border-black-50"
+                    }
                   >
-                    <Dialog.Panel
-                      className={
-                        "bg-white text-left max-w-lg w-full relative z-20 border border-black-50"
-                      }
-                    >
-                      <CardHeader>
-                        <CardTitle>{data[ditem].title}</CardTitle>
-                        <p className="text-sm">
-                          Πρόκειται να διαγράψετε την δημιουργία οριστικά,
-                          θέλετε να συνεχίσετε;
-                        </p>
-                      </CardHeader>
-                      <CardContent>
+                    <CardHeader>
+                      <CardTitle>{ditem && ditem.title}</CardTitle>
+                      <p className="text-sm">
+                        Πρόκειται να διαγράψετε την δημιουργία οριστικά, θέλετε
+                        να συνεχίσετε;
+                      </p>
+                    </CardHeader>
+                    <CardContent>
+                      {ditem && (
                         <NButton.default
                           onClick={() => {
                             setIsOpen(false);
                             setDitem(null);
-                            deletefunc(data[ditem])
+                            deletefunc(ditem)
                               .then(() => {
-                                toast.success(
-                                  `${data[ditem].title} διαγράφηκε`
-                                );
+                                toast.success(`${ditem.title} διαγράφηκε`);
                               })
                               .catch((e) => {
                                 toast.error(
-                                  `${data[ditem].title}: Σφάλμα κατά την ολική διαγραφή`
+                                  `${ditem}: Σφάλμα κατά την ολική διαγραφή`
                                 );
                                 console.error(e);
                               });
@@ -213,13 +211,13 @@ export default function Page() {
                         >
                           Διαγραφή
                         </NButton.default>
-                      </CardContent>
-                    </Dialog.Panel>
-                  </Transition.Child>
-                </div>
+                      )}
+                    </CardContent>
+                  </Dialog.Panel>
+                </Transition.Child>
               </div>
-            </Dialog>
-          )}
+            </div>
+          </Dialog>
         </Transition>
       </section>
     </div>

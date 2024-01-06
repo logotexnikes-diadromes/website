@@ -1,12 +1,10 @@
 //@ts-nocheck
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { H1, H3 } from "@/components/typography";
 import { Gradient } from "@/components/gradient";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-// import styles from "./style.module.scss";
-// import { motion, useScroll, useTransform } from "framer-motion";
 
 const organisers = [
   "δημοτική βιβλιοθήκη Πτολεμαΐδας",
@@ -16,20 +14,8 @@ const organisers = [
   "μουσικό σχολείο Πτολεμαΐδας",
   "θεατρική αναζήτηση",
 ];
-// const paragraph = `Βασικός στόχος του ετήσιου προγράμματος φιλαναγνωσίας, είναι η
-// δημιουργία ενός λογοτεχνικού ιστού με κέντρο τη νεώτερη ιστορία της
-// Ελλάδας (κατοχή –δικτατορία-πολυτεχνείο) που θα επιδιώξει να φέρει τα
-// παιδιά σε επαφή με τη μνήμη και την ιστορία, όπως την κατέγραψαν μέσα
-// στο έργο τους σημαντικές συγγραφείς της ελληνικής λογοτεχνίας για
-// παιδιά και νέους.`;
-// const words = paragraph.split(" ");
-export default function Home() {
-  // const container = useRef(null);
 
-  // const { scrollYProgress } = useScroll({
-  //   target: container,
-  //   offset: ["start 0.5", "start 0.001"],
-  // });
+export default function Home() {
   useEffect(() => {
     const gradient: any = new Gradient();
     gradient.initGradient("#gradient-canvas");
@@ -88,15 +74,6 @@ export default function Home() {
         },
         backgroundColor: "#1b1b3a",
       });
-      // gsap.to(".paragraph", {
-      //   scrollTrigger: {
-      //     trigger: ".paragraph",
-      //     start: "top 25%",
-      //     end: "top -50%",
-      //     scrub: true,
-      //   },
-      //   y: 200,
-      // });
     });
     return () => {
       ctx.revert();
@@ -146,52 +123,6 @@ export default function Home() {
           </H3>
         ))}{" "}
       </section>
-      {/* <section className="sm:mx-10 mx-6 mb-96 lg:w-1/2 paragraph">
-        <p ref={container} className={styles.paragraph}>
-          {words.map((word, i) => {
-            const start = i / words.length;
-            const end = start + 1 / words.length;
-            return (
-              <Word key={i} progress={scrollYProgress} range={[start, end]}>
-                {word}
-              </Word>
-            );
-          })}
-        </p>
-      </section> */}
     </>
   );
 }
-
-// const Word = ({ children, progress, range }) => {
-//   const amount = range[1] - range[0];
-
-//   const step = amount / children.length;
-
-//   return (
-//     <span className={styles.word}>
-//       {children.split("").map((char, i) => {
-//         const start = range[0] + i * step;
-
-//         const end = range[0] + (i + 1) * step;
-
-//         return (
-//           <Char key={`c_${i}`} progress={progress} range={[start, end]}>
-//             {char}
-//           </Char>
-//         );
-//       })}
-//     </span>
-//   );
-// };
-// const Char = ({ children, progress, range }) => {
-//   const opacity = useTransform(progress, range, [0, 1]);
-
-//   return (
-//     <span>
-//       <span className={styles.shadow}>{children}</span>
-
-//       <motion.span style={{ opacity: opacity }}>{children}</motion.span>
-//     </span>
-//   );
-// };
