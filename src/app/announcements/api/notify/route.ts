@@ -14,30 +14,36 @@ const recipeients = [
 ];
 
 export async function POST(req: Request) {
+  console.log("secret:     " + secret);
   const headersList = headers();
-  const signature = headersList.get(SIGNATURE_HEADER_NAME)!;
+  const signature = headersList.get("Authorization");
+  console.log("request-secret:     " + secret);
   const body = await req.json();
-  if (!(await isValidSignature(body, signature, secret))) {
+  if (secret === signature) {
+    resend.emails.send({
+      from: "Λογοτεχνικές διαδρομές <no-reply@logotexnikes-diadromes.gr>",
+      to: recipeients,
+      subject: `τεστ`, 
+      // react: AdmitUser(
+      //   {
+      //     email: userdata.email,
+      //     name: userdata.name,
+      //     photoURL: userdata.photoURL,
+      //   },
+      //   date
+      // ),
+      text: JSON.stringify(body),
+    });
+    return NextResponse.json({ message: "Notified all users", ok: true });
+  } else {
     return NextResponse.json(
-      { success: false, message: "Invalid signature" },
+      {
+        message: "Failed to authosize you!",
+        ok: false,
+      },
       { status: 401 }
     );
   }
-
-  resend.emails.send({
-    from: "Λογοτεχνικές διαδρομές <no-reply@logotexnikes-diadromes.gr>",
-    to: recipeients,
-    subject: `τεστ`,
-    // react: AdmitUser(
-    //   {
-    //     email: userdata.email,
-    //     name: userdata.name,
-    //     photoURL: userdata.photoURL,
-    //   },
-    //   date
-    // ),
-    text: JSON.stringify(body),
-  });
 }
 
 async function readBody(readable: any) {
