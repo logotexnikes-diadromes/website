@@ -11,6 +11,21 @@ const font = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Λογοτεχνικές διαδρομές στην ιστορία",
   description: `ετήσιο πρόγραμμα φιλαναγνωσίας`,
+  authors: [{ name: "Αλεξάνδρα Μητσιάλη" }, { name: "Στράτος Ιλερής" }],
+  creator: "Στράτος Ιλερής",
+  keywords:
+    "λογοτεχνικές διαδρομές στην ιστορία, ετήσιο πρόγραμμα φιλαναγνωσίας, λογοτεχνικές διαδρομές",
+  openGraph: {
+    emails: [
+      "info@logotexnikes-diadromes.gr",
+      "support@logotexnikes-diadromes.gr",
+    ],
+    type: "website",
+    siteName: "Λογοτεχνικές διαδρομές στην ιστορία",
+    title: "Λογοτεχνικές διαδρομές στην ιστορία",
+    url: "https://logotexnikes-diadromes.gr",
+    description: `ετήσιο πρόγραμμα φιλαναγνωσίας`,
+  },
 };
 
 export default function RootLayout({
