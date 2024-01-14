@@ -51,7 +51,7 @@ export default function Page() {
       Array.from(files).forEach((file) => {
         size = size + file.size;
       });
-      if (size > 104857600) {
+      if (size > 104857600) { 
         toast(
           <div>
             <p className="mb-0.5">Πολύ μεγάλα αρχεία!</p>

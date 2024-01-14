@@ -11,6 +11,7 @@ export default function Add(data: Add, files: FileList | null) {
     const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     const yyyy = today.getFullYear();
     const date = dd + "/" + mm + "/" + yyyy;
+    const clearSpotifyUrl = data.spotify?.split(`src="`)[1].split(`"`)[0];
     if (auth.currentUser) {
       const id = slugify(data.title + "-" + data.school);
       if (!files) {
@@ -18,9 +19,7 @@ export default function Add(data: Add, files: FileList | null) {
           title: data.title,
           description: data.description,
           school: data.school,
-          spotify: data.spotify
-            ? data.spotify?.replace("/episodes/", "/embed/episodes/")
-            : "",
+          spotify: clearSpotifyUrl,
           youtube: data.youtube ? data.youtube : "",
           createdBy: auth.currentUser?.uid,
           createdAt: date,
@@ -44,9 +43,7 @@ export default function Add(data: Add, files: FileList | null) {
                     title: data.title,
                     description: data.description,
                     school: data.school,
-                    spotify: data.spotify
-                      ? data.spotify?.replace("/episodes/", "/embed/episodes/")
-                      : "",
+                    spotify: clearSpotifyUrl,
                     youtube: data.youtube ? data.youtube : "",
                     createdBy: auth.currentUser?.uid,
                     createdAt: date,

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { H2, H3 } from "@/components/typography";
 import Link from "next/link";
 import Button from "@/components/button";
@@ -112,8 +112,8 @@ export default function Page({ params }: { params: { id: string } }) {
       scrollTrigger: {
         trigger: "#gallery",
         scrub: true,
-        start: "top 70%",
-        end: "top center",
+        start: "top bottom",
+        end: "top 60%",
       },
       opacity: 0,
     });
@@ -121,8 +121,8 @@ export default function Page({ params }: { params: { id: string } }) {
       scrollTrigger: {
         trigger: "#gallery",
         scrub: true,
-        start: "top center",
-        end: "top 10%",
+        start: "top bottom",
+        end: "top 60%",
       },
       opacity: 0,
     });
@@ -156,16 +156,18 @@ export default function Page({ params }: { params: { id: string } }) {
                             key={file}
                             src={file}
                             alt=""
-                            className="object-cover mb-2 md:max-h-[60vh] max-h-[40vh] w-auto scale-90 rounded-lg"
+                            className="object-cover mb-2 md:max-h-[60vh] max-h-[40vh] w-auto scale-90"
                           />
                         );
                       }
                       return null;
                     })
+
                     .find(Boolean)}
               </div>
             </section>
             <div className="pb-[92vh] h-2" />
+            <H2 className="text-red sm:mx-11 mx-7 mb-4">Αρχεία</H2>
             <section className="min-h-screen">
               <div
                 className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 sm:mx-10 mx-6"
@@ -193,7 +195,7 @@ export default function Page({ params }: { params: { id: string } }) {
                         ></iframe>
                       );
                     }}
-                    className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-center"
+                    className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-end"
                   >
                     <H3 className="w-full">Spotify</H3>
                   </div>

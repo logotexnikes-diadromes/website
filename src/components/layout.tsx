@@ -32,6 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       text: "επικοινωνία",
     },
   ];
+
   return (
     <ReactLenis root>
       <header className="z-30 h-[60px] max-sm:h-[85px] border-b border-b-black-50 w-full fixed top-0 left-0 sm:px-10 px-6 py-2 flex bg-white">
