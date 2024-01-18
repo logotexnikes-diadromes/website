@@ -86,7 +86,7 @@ export default function Page({ params }: { params: { id: string } }) {
               />
             );
           }}
-          className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-center"
+          className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-end"
         >
           <div className="w-full">
             <H3 className="mb-3">Αρχείο ήχου</H3>
@@ -95,7 +95,7 @@ export default function Page({ params }: { params: { id: string } }) {
       );
     } else {
       return (
-        <div className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-center">
+        <div className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-end">
           <div className="w-full">
             <H3 className="mb-3">Αρχείο {filetype}</H3>
             <Link href={file} target="_blank">
@@ -178,7 +178,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 {data.youtube && (
                   <Link
                     href={data.youtube}
-                    className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-center"
+                    className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-end"
                     target="_blank"
                   >
                     <H3 className="w-full">Youtube</H3>

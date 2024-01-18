@@ -1,12 +1,6 @@
 import { signInWithPopup } from "firebase/auth";
 import Button from "../button";
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { CardDescription, CardTitle } from "../ui/card";
 import { auth, provider } from "@/utils/firebase";
 import Link from "next/link";
 
