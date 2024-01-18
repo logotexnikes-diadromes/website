@@ -100,7 +100,7 @@ export default function Page() {
         </style>
         <H1>Αναγνωστικές προτάσεις</H1>
         <Detail className="mb-8">(βιβλίων και δραστηριοτήτων)</Detail>
-        <Link
+        {/* <Link
           href={"/recommendations/authors"}
           className="relative h-96 w-full p-5 group grid mb-20"
         >
@@ -125,7 +125,7 @@ export default function Page() {
               Περισσότερα...
             </button>
           </div>
-        </Link>
+        </Link> */}
         {reccomendations.map((i, key) => (
           <div className="h-fit mb-5" key={key}>
             <div className="em top-32 flex mt-10">
