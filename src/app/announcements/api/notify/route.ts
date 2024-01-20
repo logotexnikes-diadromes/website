@@ -4,11 +4,25 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 const secret = process.env.WEBHOOK_API_KEY!;
 const resend = new Resend(process.env.RESEND_API_KEY);
+
 const recipeients = [
   "strat.ileris@gmail.com",
   "gasterva@gmail.com",
   "sofiakalmanidou@gmail.com",
   "alexmitsiali@gmail.com",
+  "logotexnikes.diadromes@gmail.com",
+  "ninasaoulidou@gmail.com",
+  "alopoudi@gmail.com",
+  "elenpom1979@gmail.com",
+  "efipapadi69@gmail.com",
+  "pol.tsirka@gmail.com",
+  "eirsaul@gmail.com",
+  "elena.lamp@gmail.com",
+  "alexandraouroumi@gmail.com",
+  "matsoukadina@gmail.com",
+  "theodora.alexopoulou@gmail.com",
+  "sagiadastefi@gmail.com",
+  "frngniki@gmail.com"
 ];
 
 export async function POST(req: Request) {
