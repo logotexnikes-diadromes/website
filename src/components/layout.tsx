@@ -28,6 +28,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       text: "αναρτημένες δημιουγίες",
     },
     {
+      link: "/links",
+      text: "χρήσιμοι σύνδεσμοι",
+    },
+    {
       link: "/contact",
       text: "επικοινωνία",
     },
@@ -100,6 +104,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             ))}
             <Link href={"/creations/creator"}>
               <p className="pl-3">υποβολή εργασιών</p>
+            </Link>
+            <Link href={"/links"}>
+              <p>χρήσιμοι σύνδεσμοι</p>
             </Link>
             <Link href={"/contact"}>
               <p>επικοινωνία</p>

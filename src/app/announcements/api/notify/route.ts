@@ -22,7 +22,9 @@ const recipeients = [
   "matsoukadina@gmail.com",
   "theodora.alexopoulou@gmail.com",
   "sagiadastefi@gmail.com",
-  "frngniki@gmail.com"
+  "frngniki@gmail.com",
+  "tmorfop@gmail.com",
+  "olgief@gmail.com",
 ];
 
 export async function POST(req: Request) {
