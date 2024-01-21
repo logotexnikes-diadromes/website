@@ -1,7 +1,7 @@
 "use client";
 import { H1 } from "@/components/typography";
 import { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 import Link from "next/link";
 import SearchDialog from "@/components/search";
@@ -22,7 +22,9 @@ export default function Page() {
 
   // fetch data
   useEffect(() => {
-    onSnapshot(collection(db, "creations"), (docs) => {
+    const ref = collection(db, "creations");
+    const q = query(ref, orderBy("createdAt"));
+    onSnapshot(q, (docs) => {
       const creations: any = [];
       docs.forEach((doc) => {
         let data = doc.data();

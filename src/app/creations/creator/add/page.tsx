@@ -24,7 +24,6 @@ const formSchema = z.object({
 
 export default function Page() {
   const [files, setFiles] = useState<null | FileList>(null);
-  const [cover, setCover] = useState<null | File>(null);
   const [schools, setSchools] = useState<String[] | null>(null);
   const {
     register,
@@ -51,7 +50,7 @@ export default function Page() {
       Array.from(files).forEach((file) => {
         size = size + file.size;
       });
-      if (size > 104857600) { 
+      if (size > 104857600) {
         toast(
           <div>
             <p className="mb-0.5">Πολύ μεγάλα αρχεία!</p>
@@ -63,17 +62,27 @@ export default function Page() {
       } else {
         toast.loading("Προσθήκη...");
         toast.loading("Μεταφόρτωση αρχείων...");
-        addfunc(values, files).then(() => {
-          toast.dismiss();
-          toast("Η δημιουργία σας προστέθηκε!");
-        });
+        addfunc(values, files)
+          .then(() => {
+            toast.dismiss();
+            toast("Η δημιουργία σας προστέθηκε!");
+          })
+          .catch((e) => {
+            toast.dismiss();
+            toast.error(e);
+          });
       }
     } else {
       toast.loading("Προσθήκη...");
-      addfunc(values, null).then(() => {
-        toast.dismiss();
-        toast("Η δημιουργία σας προστέθηκε!");
-      });
+      addfunc(values, null)
+        .then(() => {
+          toast.dismiss();
+          toast("Η δημιουργία σας προστέθηκε!");
+        })
+        .catch((e) => {
+          toast.dismiss();
+          toast.error(e);
+        });
     }
   }
   const watchSchool = watch("school");

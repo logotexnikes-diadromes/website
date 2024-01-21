@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, Suspense, useEffect, useState } from "react";
 import { H2, H3 } from "@/components/typography";
 import Link from "next/link";
 import Button from "@/components/button";
@@ -189,10 +189,24 @@ export default function Page({ params }: { params: { id: string } }) {
                     onClick={() => {
                       setIsOpen(true);
                       setContent(
-                        <iframe
-                          className="w-[80vw] max-w-md h-[352px]"
-                          src={data.spotify}
-                        ></iframe>
+                        <div>
+                          <Link
+                            href={`${data.spotify.replace(
+                              `/embed/episode/`,
+                              `/episode/`
+                            )}`}
+                            target="_blank"
+                            className="focus:outline-none"
+                          >
+                            <p className="text-xs opacity-50 text-right mb-2 underline">
+                              Αντιμετωπίσατε κάποιο πρόβλημα;
+                            </p>
+                          </Link>
+                          <iframe
+                            className="w-[80vw] max-w-md h-[352px]"
+                            src={data.spotify}
+                          ></iframe>
+                        </div>
                       );
                     }}
                     className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-end"

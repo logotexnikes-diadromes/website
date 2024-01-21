@@ -79,7 +79,7 @@ export default function Page() {
                   >
                     <Popover.Panel
                       className={
-                        "absolute -bottom-36 right-2 bg-white border border-black-50 "
+                        "absolute -bottom-36 right-2 bg-white border border-black-50 z-10 "
                       }
                     >
                       <Link
