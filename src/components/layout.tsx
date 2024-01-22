@@ -117,7 +117,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         <div className="border-t border-black-50 py-2 text-center text-xs">
-          © λογοτεχνικές διαδρομές {new Date().getFullYear()}
+          © Στράτος Ιλερής {new Date().getFullYear()}
         </div>
       </footer>
     </ReactLenis>
