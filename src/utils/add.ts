@@ -20,7 +20,9 @@ export default function Add(data: Add, files: FileList | null) {
       }
     }
     if (auth.currentUser) {
-      const id = slugify(data.title + "-" + data.school);
+      const id = slugify(
+        data.title + "-" + data.school + "-" + today.getMilliseconds()
+      );
       if (!files) {
         setDoc(doc(db, "creations", id), {
           title: data.title,

@@ -68,16 +68,16 @@ export default function SearchDialog({ creations }: { creations: any }) {
                 <Dialog.Panel className="transition-all">
                   <div
                     className={
-                      "bg-white border border-black-50 max-w-2xl w-screen relative z-20 p-5 min-h-[50vh] rounded-lg"
+                      "bg-white border border-black-50 max-w-2xl w-screen relative z-20 p-5 min-h-[50vh] "
                     }
                   >
                     <H2 className="mb-5 text-red">Αναζήτηση</H2>
                     <input
-                      placeholder="Τίτλος, σχολείο, περιγραφή"
+                      placeholder="Ψάξτε για τίτλο, σχολείο, περιγραφή"
                       className="w-full h-10 border-b p-5 py-6 border-b-black-50 focus:outline-none mb-5"
                       value={search}
                       onChange={(e) =>
-                        router.push(`?s=${e.target.value}`, { scroll: false })
+                        router.push(`?s=${encodeURIComponent(e.target.value)}`, { scroll: false })
                       }
                     ></input>
                     <div className="space-y-3 grid my-auto overflow-y-auto overflow-x-hidden max-h-64">
