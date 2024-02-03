@@ -195,8 +195,8 @@ export default function Page({ params }: { params: { id: string } }) {
               </div>
             </section>
             <div className="pb-[92vh] h-2" />
-            <H2 className="text-red sm:mx-11 mx-7 mb-4">Αρχεία</H2>
-            <section className="min-h-screen">
+            <H2 className="text-red sm:mx-11 mx-7 mb-4 relative z-10">Αρχεία</H2>
+            <section className="min-h-screen relative z-10">
               <div
                 className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 sm:mx-10 mx-6"
                 id="gallery"
