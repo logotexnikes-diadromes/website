@@ -64,7 +64,7 @@ function Error() {
     <div className="min-h-screen grid place-items-center sm:mx-10 mx-6">
       <div className="max-w-md p-5 border border-black-50">
         <H3 className="text-red mb-3">Προέκυψε ένα σφάλμα</H3>
-        <p>Βαθμολογίστε μας απαντώντας στο email που σας έχει αποσταλεί.</p>
+        <p>Βαθμολογήστε μας απαντώντας στο email που σας έχει αποσταλεί.</p>
       </div>
     </div>
   );
