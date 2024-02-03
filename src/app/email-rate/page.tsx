@@ -26,7 +26,7 @@ export default async function Page({
                 {res}, η βαθμολογία σας{" "}
                 <span className="text-red">{searchParams.rating}</span> έχει
                 καταχωρηθεί. Χαιρόμαστε που είχατε μια ευχάριστη εμπειρία με την
-                πλατφόμα.
+                πλατφόρμα.
               </p>
             </div>
           </div>
