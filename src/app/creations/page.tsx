@@ -1,7 +1,13 @@
 "use client";
 import { H1 } from "@/components/typography";
 import { useEffect, useState } from "react";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  Timestamp,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { db } from "@/utils/firebase";
 import Link from "next/link";
 import SearchDialog from "@/components/search";
@@ -13,7 +19,7 @@ interface Creation {
   school: string;
   description: string;
   id: string;
-  createdAt: string;
+  createdAt: Timestamp;
 }
 
 export default function Page() {
@@ -61,7 +67,11 @@ export default function Page() {
               <p className="px-3">{i.title}</p>
               <div className="flex mb-0 mt-auto pt-2 text-sm px-3">
                 <p className="opacity-50">{i.school}</p>
-                <p className="opacity-50 ml-auto">{i.createdAt}</p>
+                <p className="opacity-50 ml-auto">
+                  {i.createdAt.toDate().getDate() +
+                    "/" +
+                    (i.createdAt.toDate().getMonth() + 1)}
+                </p>
               </div>
             </Link>
           ))

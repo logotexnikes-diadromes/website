@@ -6,11 +6,7 @@ import slugify from "@sindresorhus/slugify";
 
 export default function Add(data: Add, files: FileList | null) {
   return new Promise(async (resolve, reject) => {
-    const today = new Date();
-    const dd = String(today.getDate()).padStart(2, "0");
-    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    const yyyy = today.getFullYear();
-    const date = dd + "/" + mm + "/" + yyyy;
+    const now = new Date();
     let clearSpotifyUrl = "";
     if (data.spotify) {
       try {
@@ -21,7 +17,7 @@ export default function Add(data: Add, files: FileList | null) {
     }
     if (auth.currentUser) {
       const id = slugify(
-        data.title + "-" + data.school + "-" + today.getMilliseconds()
+        data.title + "-" + data.school + "-" + now.getMilliseconds()
       );
       if (!files) {
         setDoc(doc(db, "creations", id), {
@@ -31,7 +27,7 @@ export default function Add(data: Add, files: FileList | null) {
           spotify: clearSpotifyUrl,
           youtube: data.youtube ? data.youtube : "",
           createdBy: auth.currentUser?.uid,
-          createdAt: date,
+          createdAt: now,
         }).catch((e) => {
           reject(e);
         });
@@ -55,7 +51,7 @@ export default function Add(data: Add, files: FileList | null) {
                     spotify: clearSpotifyUrl,
                     youtube: data.youtube ? data.youtube : "",
                     createdBy: auth.currentUser?.uid,
-                    createdAt: date,
+                    createdAt: now,
                     files: filelocs,
                     fileURLS: fileUrls,
                   }).catch((e) => {

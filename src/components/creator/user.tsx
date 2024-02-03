@@ -125,8 +125,8 @@ export default function User({ user }: { user: UserInfo }) {
           </div>
         </Dialog>
       </Transition>
-      <Popover className="relative">
-        <Popover.Button>
+      <Popover className="relative ">
+        <Popover.Button >
           <Image
             alt={"εικόνα προφίλ του/ της" + user.displayName}
             src={user.photoURL ? user.photoURL : defaultUser}

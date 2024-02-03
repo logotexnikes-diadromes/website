@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
-import { Fragment, Suspense, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { H2, H3 } from "@/components/typography";
 import Link from "next/link";
 import Button from "@/components/button";
 import { Dialog, Transition } from "@headlessui/react";
-import { doc, getDoc } from "firebase/firestore";
+import { Timestamp, doc, getDoc } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 import { ScrollTrigger, gsap } from "gsap/all";
 import { X } from "@/components/creator/svgs";
@@ -15,7 +15,7 @@ interface Creation {
   title: string;
   description: string;
   school: string;
-  createdAt: string;
+  createdAt: Timestamp;
   spotify: string;
   youtube: string;
   fileURLS: string[];
@@ -127,21 +127,49 @@ export default function Page({ params }: { params: { id: string } }) {
       opacity: 0,
     });
   }, [data]);
+  const linkRegex = /(https?\:\/\/)?(www\.)?[^\s]+\.[^\s]+/g;
+  function replacer(matched: any) {
+    let withProtocol = matched;
+
+    if (!withProtocol.startsWith("http")) {
+      withProtocol = "http://" + matched;
+    }
+
+    const newStr = `<a
+      target="__blank"
+      class="underline text-red underline-offset-2"
+      href="${withProtocol}"
+    >
+      ${matched}
+    </a>`;
+
+    return newStr;
+  }
   return (
     <div className="min-h-screen">
       {exists ? (
         data && (
           <>
-            <section className="fixed -z-20 grid h-[92vh] md:grid-cols-2 place-items-center sm:mx-10 mx-6 hero">
+            <section className="fixed grid h-[92vh] md:grid-cols-2 place-items-center sm:mx-10 mx-6 hero">
               <div>
                 <H2 className="text-red">{data.title}</H2>
                 <div className="flex space-x-3">
                   <p className="opacity-50">{data.school}</p>
                   <p>|</p>
-                  <p className="opacity-50">{data.createdAt}</p>
+                  <p className="opacity-50">
+                    {data.createdAt.toDate().getDate() +
+                      "/" +
+                      (data.createdAt.toDate().getMonth() + 1) +
+                      "/" +
+                      data.createdAt.toDate().getFullYear()}
+                  </p>
                 </div>
                 <div className="mb-5 mt-2 border-b border-b-black" />
-                <p>{data.description}</p>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: data.description.replaceAll(linkRegex, replacer),
+                  }}
+                ></p>
               </div>
               <div className="md:p-10">
                 {data.fileURLS &&
