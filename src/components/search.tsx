@@ -77,7 +77,10 @@ export default function SearchDialog({ creations }: { creations: any }) {
                       className="w-full h-10 border-b p-5 py-6 border-b-black-50 focus:outline-none mb-5"
                       value={search}
                       onChange={(e) =>
-                        router.push(`?s=${encodeURIComponent(e.target.value)}`, { scroll: false })
+                        router.push(
+                          `?s=${encodeURIComponent(e.target.value)}`,
+                          { scroll: false }
+                        )
                       }
                     ></input>
                     <div className="space-y-3 grid my-auto overflow-y-auto overflow-x-hidden max-h-64">
@@ -93,7 +96,9 @@ export default function SearchDialog({ creations }: { creations: any }) {
                                 {results[0].item.school}
                               </p>
                               <p className="opacity-50 ml-auto">
-                                {results[0].item.createdAt}
+                                {results[0].createdAt.toDate().getDate() +
+                                  "/" +
+                                  (results[0].createdAt.toDate().getMonth() + 1)}{" "}
                               </p>
                             </div>
                           </Link>
