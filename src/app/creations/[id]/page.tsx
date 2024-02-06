@@ -134,22 +134,12 @@ export default function Page({ params }: { params: { id: string } }) {
     if (!withProtocol.startsWith("http")) {
       withProtocol = "http://" + matched;
     }
-
-    if (matched.includes("//")) {
-      if (matched.split("//")[1].includes("/")) {
-        show = matched.split("//")[1].split("/")[0];
-      } else {
-        show = matched.split("//")[1];
-      }
-    } else {
-      show = matched;
-    }
     const newStr = `<a
       target="__blank"
       class="underline text-red underline-offset-2"
       href="${withProtocol}"
     >
-    ${show}
+    ${matched.split("//")[1].split("/")[0]}
     </a>`;
     return newStr;
   }
