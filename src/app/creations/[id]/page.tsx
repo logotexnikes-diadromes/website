@@ -128,21 +128,29 @@ export default function Page({ params }: { params: { id: string } }) {
     });
   }, [data]);
   const linkRegex = /(https?\:\/\/)?(www\.)?[^\s]+\.[^\s]+/g;
-  function replacer(matched: any) {
+  function replacer(matched: string) {
     let withProtocol = matched;
-
+    let show = matched;
     if (!withProtocol.startsWith("http")) {
       withProtocol = "http://" + matched;
     }
 
+    if (matched.includes("//")) {
+      if (matched.split("//")[1].includes("/")) {
+        show = matched.split("//")[1].split("/")[0];
+      } else {
+        show = matched.split("//")[1];
+      }
+    } else {
+      show = matched;
+    }
     const newStr = `<a
       target="__blank"
       class="underline text-red underline-offset-2"
       href="${withProtocol}"
     >
-      ${matched}
+    ${show}
     </a>`;
-
     return newStr;
   }
   return (
@@ -166,6 +174,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 </div>
                 <div className="mb-5 mt-2 border-b border-b-black" />
                 <p
+                  className="max-sm:text-xs"
                   dangerouslySetInnerHTML={{
                     __html: data.description.replaceAll(linkRegex, replacer),
                   }}
@@ -195,7 +204,9 @@ export default function Page({ params }: { params: { id: string } }) {
               </div>
             </section>
             <div className="pb-[92vh] h-2" />
-            <H2 className="text-red sm:mx-11 mx-7 mb-4 relative z-10">Αρχεία</H2>
+            <H2 className="text-red sm:mx-11 mx-7 mb-4 relative z-10">
+              Αρχεία
+            </H2>
             <section className="min-h-screen relative z-10">
               <div
                 className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 sm:mx-10 mx-6"
