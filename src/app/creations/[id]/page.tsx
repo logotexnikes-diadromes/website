@@ -130,18 +130,26 @@ export default function Page({ params }: { params: { id: string } }) {
   const linkRegex = /(https?\:\/\/)?(www\.)?[^\s]+\.[^\s]+/g;
   function replacer(matched: string) {
     let withProtocol = matched;
-    let show = matched;
     if (!withProtocol.startsWith("http")) {
       withProtocol = "http://" + matched;
     }
-    const newStr = `<a
+    const newStr = (show: string) =>
+      `<a
       target="__blank"
       class="underline text-red underline-offset-2"
       href="${withProtocol}"
-    >
-    ${matched.split("//")[1].split("/")[0]}
-    </a>`;
-    return newStr;
+      >
+      ${show}
+      </a>`;
+    if (matched.includes("//")) {
+      if (matched.split("//")[1].includes("/")) {
+        return newStr(matched.split("//")[1].split("/")[0]);
+      } else {
+        return newStr(matched.split("//")[1]);
+      }
+    } else {
+      return matched;
+    }
   }
   return (
     <div className="min-h-screen">

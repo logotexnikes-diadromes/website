@@ -96,9 +96,9 @@ export default function SearchDialog({ creations }: { creations: any }) {
                                 {results[0].item.school}
                               </p>
                               <p className="opacity-50 ml-auto">
-                                {results[0].createdAt.toDate().getDate() +
+                                {results[0].item.createdAt.toDate().getDate() +
                                   "/" +
-                                  (results[0].createdAt.toDate().getMonth() + 1)}{" "}
+                                  (results[0].item.createdAt.toDate().getMonth() + 1)}{" "}
                               </p>
                             </div>
                           </Link>
