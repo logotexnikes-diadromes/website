@@ -16,7 +16,7 @@ const recipeients = [
   "elenpom1979@gmail.com",
   "efipapadi69@gmail.com",
   "pol.tsirka@gmail.com",
-  "eirsaul@yahoo.gr", 
+  "eirsaul@yahoo.gr",
   "elena.lamp@gmail.com",
   "alexandraouroumi@gmail.com",
   "matsoukadina@gmail.com",
@@ -26,7 +26,8 @@ const recipeients = [
   "tmorfop@gmail.com",
   "olgief@gmail.com",
   "nicky.zavitsanou@gmail.com",
-  "karageorgioueuangelia@gmail.com"
+  "karageorgioueuangelia@gmail.com",
+  "tziniza@gmail.com",
 ];
 
 export async function POST(req: Request) {
