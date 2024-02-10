@@ -4,42 +4,34 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 const secret = process.env.WEBHOOK_API_KEY!;
 const resend = new Resend(process.env.RESEND_API_KEY);
-
-const recipeients = [
-  "strat.ileris@gmail.com",
-  "gasterva@gmail.com",
-  "sofiakalmanidou@gmail.com",
-  "alexmitsiali@gmail.com",
-  "logotexnikes.diadromes@gmail.com",
-  "ninasaoulidou@gmail.com",
-  "alopoudi@gmail.com",
-  "elenpom1979@gmail.com",
-  "efipapadi69@gmail.com",
-  "pol.tsirka@gmail.com",
-  "eirsaul@yahoo.gr",
-  "elena.lamp@gmail.com",
-  "alexandraouroumi@gmail.com",
-  "matsoukadina@gmail.com",
-  "theodora.alexopoulou@gmail.com",
-  "sagiadastefi@gmail.com",
-  "frngniki@gmail.com",
-  "tmorfop@gmail.com",
-  "olgief@gmail.com",
-  "nicky.zavitsanou@gmail.com",
-  "karageorgioueuangelia@gmail.com",
-  "tziniza@gmail.com",
-];
-
+interface Contact {
+  id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  created_at: string;
+  unsubscribed: boolean;
+}
 export async function POST(req: Request) {
   const headersList = headers();
   const signature = headersList.get("Authorization");
   const { title, _createdAt, content } = await req.json();
   if (secret === signature) {
     if (content && _createdAt && content) {
+      const rawcontacts = await resend.contacts.list({
+        audience_id: "277069de-7753-49d1-a3a4-8cd624b15554",
+      });
+      let sub_contacts: string[] = [];
+      //@ts-ignore
+      const contacts: Contact[] = await rawcontacts.data.data;
+      contacts.forEach((c) => {
+        if (!c.unsubscribed) {
+          sub_contacts.push(c.email);
+        }
+      });
       resend.emails.send({
         from: "Λογοτεχνικές διαδρομές <no-reply@logotexnikes-diadromes.gr>",
-        bcc: recipeients,
-        to: "info@logotexnikes-diadromes.gr",
+        to: sub_contacts,
         reply_to: "info@logotexnikes-diadromes.gr",
         subject: `Ανακοίνωση: ${title}`,
         react: Announcement(title, _createdAt, JSON.stringify(content)),

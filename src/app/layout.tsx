@@ -38,7 +38,9 @@ export default function RootLayout({
       <body className={font.className}>
         <Layout>{children}</Layout>
         <SpeedInsights
-          beforeSend={(data) => {
+          //@ts-ignore
+          beforeSend={async (data) => {
+            "use server";
             if (data.url.includes("/announcements/s")) {
               return null;
             }
