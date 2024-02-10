@@ -37,7 +37,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <Layout>{children}</Layout>
-        <SpeedInsights />
+        <SpeedInsights
+          beforeSend={(data) => {
+            if (data.url.includes("/announcements/s")) {
+              return null;
+            }
+            return data;
+          }}
+        />
         <Analytics />
       </body>
     </html>
