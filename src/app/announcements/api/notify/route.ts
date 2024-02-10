@@ -19,7 +19,7 @@ export async function POST(req: Request) {
   if (secret === signature) {
     if (content && _createdAt && content) {
       const rawcontacts = await resend.contacts.list({
-        audience_id: "277069de-7753-49d1-a3a4-8cd624b15554",
+        audience_id: "fe2e215f-4afa-411d-9542-22d101c729e5",
       });
       let sub_contacts: string[] = [];
       //@ts-ignore
