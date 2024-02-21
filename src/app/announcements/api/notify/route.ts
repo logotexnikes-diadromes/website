@@ -21,11 +21,10 @@ export async function POST(req: Request) {
       const rawcontacts = await resend.contacts.list({
         audience_id: "fe2e215f-4afa-411d-9542-22d101c729e5",
       });
-      let sub_contacts: string[] = [];
       //@ts-ignore
       const contacts: Contact[] =  rawcontacts.data.data;
-      contacts.forEach((c) => {
-        
+      let sub_contacts=[]
+      await contacts.forEach((c) => {
         if (!c.unsubscribed) {
           sub_contacts.push(c.email);
         }
