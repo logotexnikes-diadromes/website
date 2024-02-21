@@ -22,8 +22,8 @@ export async function POST(req: Request) {
         audience_id: "fe2e215f-4afa-411d-9542-22d101c729e5",
       });
       //@ts-ignore
-      const contacts: Contact[] =  rawcontacts.data.data;
-      let sub_contacts=[]
+      const contacts: Contact[] = rawcontacts.data.data;
+      let sub_contacts: string[] = [];
       await contacts.forEach((c) => {
         if (!c.unsubscribed) {
           sub_contacts.push(c.email);

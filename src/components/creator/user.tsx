@@ -1,7 +1,7 @@
 import Image from "next/image";
 import defaultUser from "@/app/assets/Default_pfp.png";
 import { UserInfo, signOut } from "firebase/auth";
-import { HelpCircle, LogOut } from "lucide-react";
+import { HelpCircle, LogOut, Paintbrush, Pen, PenLine } from "lucide-react";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { auth } from "@/utils/firebase";
 import { Fragment, useEffect, useState } from "react";
@@ -158,11 +158,10 @@ export default function User({ user }: { user: UserInfo }) {
             </button>
             <Link
               className="flex border-b w-full px-4 py-2 hover:bg-slate-50 duration-300"
-              href={"/help"}
-              target="_blank"
+              href={"/creations/creator"}
             >
-              <HelpCircle className="mr-2 h-5 w-5" />
-              <span>Βοήθεια</span>
+              <PenLine className="mr-2 h-5 w-5" />
+              <span>Δημιουργίες</span>
             </Link>
             <button
               className="flex border-b w-full px-4 py-2 hover:bg-slate-50 duration-300"
