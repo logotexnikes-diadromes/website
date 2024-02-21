@@ -47,7 +47,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 Βιβλιοnet
               </Link>
             </p>
-            <p>{i.bio}</p>
+            <p dangerouslySetInnerHTML={{ __html: i.bio }}></p>
           </section>
         </Transition>
       </div>

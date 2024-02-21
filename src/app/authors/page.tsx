@@ -13,7 +13,7 @@ export default function Page() {
   return (
     <>
       <H1 className="sm:mx-10 mx-6">Συγγραφείς</H1>
-      <p className="max-lg:w-full w-1/2 mb-8 sm:mx-10 mx-6">
+      <p className="max-lg:w-[90%] w-1/2 mb-8 sm:mx-10 mx-6">
         Οι «Λογοτεχνικές διαδρομές στην ιστορία» ξεκινούν τον Οκτώβριο και
         εκτυλίσσονται σε δύο κύκλους. Ο πρώτος κύκλος αποτελεί ένα αφιέρωμα σε
         δύο σημαντικές μορφές της σύγχρονης ελληνικής λογοτεχνίας, την Άλκη Ζέη
@@ -32,9 +32,7 @@ export default function Page() {
           as="div"
           className={`absolute top-0 left-0 w-screen h-screen bg-white  `}
           show={selected ? true : false}
-          afterEnter={() =>
-            setTimeout(() => router.push(`/authors/${selected?.id}`), 300)
-          }
+          afterEnter={() => router.push(`/authors/${selected?.id}`)}
           enter="duration-200 delay-500"
           leave="duration-500"
           enterFrom="opacity-0"
