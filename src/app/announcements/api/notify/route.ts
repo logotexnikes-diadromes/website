@@ -23,8 +23,9 @@ export async function POST(req: Request) {
       });
       let sub_contacts: string[] = [];
       //@ts-ignore
-      const contacts: Contact[] = await rawcontacts.data.data;
+      const contacts: Contact[] =  rawcontacts.data.data;
       contacts.forEach((c) => {
+        
         if (!c.unsubscribed) {
           sub_contacts.push(c.email);
         }
