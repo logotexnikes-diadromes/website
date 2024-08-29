@@ -1,4 +1,4 @@
-export interface Add {
+export interface AddType {
   title: string;
   school: string;
   description: string;

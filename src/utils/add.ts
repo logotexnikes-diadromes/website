@@ -1,10 +1,10 @@
-import { Add } from "@/utils/types";
+import { AddType } from "@/utils/types";
 import { auth, db, storage } from "./firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import slugify from "@sindresorhus/slugify";
 
-export default function Add(data: Add, files: FileList | null) {
+export default function Add(data: AddType, files: FileList | null) {
   return new Promise(async (resolve, reject) => {
     const now = new Date();
     let clearSpotifyUrl = "";
