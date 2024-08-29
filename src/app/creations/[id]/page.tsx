@@ -138,7 +138,7 @@ export default function Page({ params }: { params: { id: string } }) {
         data && (
           <>
             <section className="grid py-24 w-full place-items-center hero border-b">
-              <div className="text-center w-[97vw] max-w-screen-sm">
+              <div className="text-center w-[97vw] max-w-screen-md">
                 <H1 className="text-red">{data.title}</H1>
                 <div className="flex opacity-50 space-x-3 text-sm mx-auto w-fit mb-6">
                   <p>{data.school}</p>
@@ -164,9 +164,9 @@ export default function Page({ params }: { params: { id: string } }) {
                 Αρχεία
               </H2>
             ) : null}
-            <section className="min-h-screen relative z-10">
+            <section className="min-h-screen">
               <div
-                className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 sm:mx-10 mx-6"
+                className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 sm:mx-10 mx-6"
                 id="gallery"
               >
                 {data.fileURLS &&

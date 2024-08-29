@@ -47,7 +47,7 @@ export default function Page() {
 
   return (
     <div className="sm:mx-10 mx-6">
-      <div className="flex md:flex-row flex-col w-full mb-8">
+      <div className="flex md:flex-row flex-col w-full py-24">
         <H1>Aναρτημένες δημιουργίες</H1>
         <SearchDialog creations={creations} />
       </div>

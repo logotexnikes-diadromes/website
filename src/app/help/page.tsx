@@ -1,4 +1,4 @@
-import { H1, H2 } from "@/components/typography";
+import { H1, H2, H3 } from "@/components/typography";
 import type { Metadata } from "next";
 import Link from "next/link";
 export const metadata: Metadata = {
@@ -25,15 +25,15 @@ export default function Page() {
   ];
   return (
     <>
-      <H1 className="mb-8">Βοήθεια</H1>
+      <H1 className="py-24">Βοήθεια</H1>
       {links.map((i, key) => (
         <Link href={i.link} key={key}>
-          <H2
-            className={`border-y border-y-black-50 bg-white py-3 my-2`}
+          <H3
+            className={`border-y-black-50 bg-white mb-6 hover:translate-x-5 duration-500 hover:opacity-50`}
             key={key}
           >
             {i.text}
-          </H2>{" "}
+          </H3>{" "}
         </Link>
       ))}
     </>

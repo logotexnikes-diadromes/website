@@ -43,9 +43,8 @@ export const metadata: Metadata = {
 };
 export default function Page() {
   return (
-    <div className="min-h-screen group">
-      <div className="sm:mx-10 mx-6">
-        <H1 className="mb-8">Χρήσιμοι σύνδεσμοι</H1>
+    <div className="grid place-items-center sm:mx-10 mx-6 min-h-[80vh]">
+      <div className="">
         <div
           className="rounded-full w-full h-12 mb-12 flex items-center px-5 max-w-xl"
           style={{ boxShadow: "0 2px 5px 1px rgba(64, 60, 67, 0.16)" }}

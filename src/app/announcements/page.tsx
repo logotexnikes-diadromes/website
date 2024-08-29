@@ -14,10 +14,6 @@ interface Announcement {
   _createdAt: Date;
   alt: string;
 }
-interface dimensions {
-  width: number;
-  height: number;
-}
 
 export default function Page() {
   const [announcements, setAnnouncements] = useState<Announcement[] | null>(
@@ -36,26 +32,28 @@ export default function Page() {
     return day + "/" + month + "/" + year;
   }
   return (
-    <section className="sm:mx-10 mx-6 min-h-screen">
-      <H1 className="mb-8">Ανακοινώσεις</H1>
+    <>
+      <div className="py-24">
+        <H1 className="mb-8 sm:mx-10 mx-6">Ανακοινώσεις</H1>
+      </div>
 
       <div>
         {announcements &&
           announcements.map((i: Announcement, key: number) => (
             <article
-              className={`border-black-50 bg-white min-h-[70vh] grid place-items-center  mb-12 rounded-lg`}
+              className={`border-black/20 py-10 sm:px-10 px-6 bg-white border-b ${key == 0 && "border-t"} `}
               key={key}
             >
-              <div className="w-full px-6">
-                <div className="pr-3 mr-3 w-96 space-y-1 mb-8">
-                  <H3 className="text-red">{i.title}</H3>
-                  <p className="opacity-50">{date(i._createdAt)}</p>
-                </div>
+              <div className="space-y-1 mb-8">
+                <p className="opacity-50 text-sm ml-3">{date(i._createdAt)}</p>
+                <H3 className="text-red">{i.title}</H3>
+              </div>
+              <div className="max-w-[90vw] max-md:text-sm">
                 <BlockContent blocks={i.content} />
               </div>
             </article>
           ))}
       </div>
-    </section>
+    </>
   );
 }

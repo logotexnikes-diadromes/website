@@ -7,11 +7,6 @@ import { Analytics } from "@vercel/analytics/react";
 const font = JetBrains_Mono({
   subsets: ["latin", "greek"],
 });
-const font_sec = IBM_Plex_Sans({
-  variable: "--plex-sans",
-  weight: ["300"],
-  subsets: ["greek", "latin"],
-});
 
 export const metadata: Metadata = {
   title: "Λογοτεχνικές διαδρομές στην ιστορία",
@@ -40,7 +35,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${font.className} ${font_sec.variable}`}>
+      <body className={`${font.className} `}>
         <Layout>{children}</Layout>
         <SpeedInsights
           //@ts-ignore

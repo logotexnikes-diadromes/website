@@ -3,13 +3,9 @@ import { Detail, H1, H2, H3 } from "@/components/typography";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
-import { Gradient } from "@/components/gradient";
-import Link from "next/link";
 
 export default function Page() {
   useEffect(() => {
-    const gradient: any = new Gradient();
-    gradient.initGradient("#gradient-canvas");
     const ctx = gsap.context(() => {
       gsap.registerPlugin(ScrollTrigger);
       const books = gsap.utils.toArray(".book");
@@ -17,8 +13,8 @@ export default function Page() {
         gsap.from(book, {
           scrollTrigger: {
             scrub: true,
-            start: "top 80%",
-            end: "top 50%",
+            start: "top 90%",
+            end: "top 70%",
             trigger: book,
           },
           opacity: 0,
@@ -82,9 +78,6 @@ export default function Page() {
       "Podcasts",
     ],
   };
-  const words =
-    "Οι αναγνωστικές προτάσεις των συγραφέων του προγράμματος.".split(" ");
-
   return (
     <>
       <section className="sm:mx-10 mx-6">
@@ -98,34 +91,10 @@ export default function Page() {
             }
           `}
         </style>
-        <H1>Αναγνωστικές προτάσεις</H1>
-        <Detail className="mb-8">(βιβλίων και δραστηριοτήτων)</Detail>
-        {/* <Link
-          href={"/recommendations/authors"}
-          className="relative h-96 w-full p-5 group grid mb-20"
-        >
-          <canvas
-            id="gradient-canvas"
-            className={`w-full absolute top-0 left-0 h-full rounded-lg`}
-            data-transition-in
-            data-js-darken-top
-          ></canvas>
-          <div className="place-self-center w-full">
-            <div>
-              {words.map((word: string, key: number) => (
-                <span
-                  key={key}
-                  className=" [font-size:_clamp(30px,5vw,40px)] bg-white text-purple relative"
-                >
-                  {word + " "}
-                </span>
-              ))}
-            </div>
-            <button className="bg-white relative font-medium mt-2">
-              Περισσότερα...
-            </button>
-          </div>
-        </Link> */}
+        <div className="py-8">
+          <H1>Αναγνωστικές προτάσεις</H1>
+          <Detail className="mb-8">(βιβλίων και δραστηριοτήτων)</Detail>
+        </div>
         {reccomendations.map((i, key) => (
           <div className="h-fit mb-5" key={key}>
             <div className="em top-32 flex mt-10">
@@ -133,14 +102,14 @@ export default function Page() {
               <Detail className="my-auto ml-3">{i.month}</Detail>
             </div>
             {i.items.map((ii, ikey) => (
-              <H2
+              <H3
                 className={` border-black-50 bg-white py-3 my-2 ${
                   key == 0 ? ikey !== 0 && "book" : "book"
-                } cursor-default relative border-b`}
+                } cursor-default relative border-b max-md:text-right`}
                 key={key}
               >
                 {ii}
-              </H2>
+              </H3>
             ))}
           </div>
         ))}
@@ -150,12 +119,12 @@ export default function Page() {
             <H3 className="text-red mt-8">{activities.author}</H3>
           </div>
           {activities.items.map((i, key) => (
-            <H2
-              className={`border-b border-black-50 bg-white py-3 my-2 book cursor-default relative z-[${key}]`}
+            <H3
+              className={`border-b border-black-50 bg-white py-3 my-2 book cursor-default relative z-[${key}] max-md:text-right`}
               key={key}
             >
               {i}
-            </H2>
+            </H3>
           ))}
         </div>
       </section>

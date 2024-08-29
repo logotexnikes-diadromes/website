@@ -27,6 +27,7 @@ export default function RootLayout({
     state: "wait" | "ok" | "error";
     message: string;
   }>({ state: "wait", message: "Περιμένετε..." });
+
   function sendMail() {
     getAuth()
       .currentUser!.getIdToken(true)
@@ -129,25 +130,22 @@ export default function RootLayout({
           <span className="loader"></span>
         </div>
       );
-    } else {
-      if (user) {
-        if (authorised) {
-          return (
-            <>
-              <header className="fixed bottom-0 right-0 bg-white rounded-tl-lg px-4 pt-3 pb-1 z-10">
-                <User user={user} />
-              </header>
-
-              {children}
-            </>
-          );
-        } else {
-          return <Processing user={user} notified={notified} />;
-        }
+    }
+    if (user) {
+      if (authorised) {
+        return (
+          <>
+            <header className="fixed bottom-0 right-0 rounded-tl-lg px-4 pt-3 pb-1 z-10">
+              <User user={user} />
+            </header>
+            {children}
+          </>
+        );
       } else {
-        return <Login />;
+        return <Processing user={user} notified={notified} />;
       }
     }
+    return <Login />;
   }
   return (
     <div className={"min-h-screen"}>

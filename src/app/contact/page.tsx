@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <div className="min-h-screen group">
       <div className="sm:mx-10 mx-6">
-        <H1 className="mb-8">Επικοινωνία</H1>
+        <H1 className="py-24">Επικοινωνία</H1>
         <div>
           <Detail>Υπεύθυνες προγράμματος</Detail>
           <Link

@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import { Gradient } from "@/components/gradient";
-import { H1, H2 } from "@/components/typography";
+import { H1, H2, H3 } from "@/components/typography";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useEffect } from "react";
@@ -35,8 +35,6 @@ const schools = [
 ];
 export default function Page() {
   useEffect(() => {
-    const gradient: any = new Gradient();
-    gradient.initGradient("#gradient-canvas");
     const ctx = gsap.context(() => {
       gsap.registerPlugin(ScrollTrigger);
       const books = gsap.utils.toArray(".school");
@@ -44,8 +42,8 @@ export default function Page() {
         gsap.from(book, {
           scrollTrigger: {
             scrub: true,
-            start: "top 80%",
-            end: "top 50%",
+            start: "top 90%",
+            end: "top 70%",
             trigger: book,
           },
           opacity: 0,
@@ -58,25 +56,17 @@ export default function Page() {
   return (
     <>
       <section className="sm:mx-10 mx-6">
-        <style global jsx>
-          {`
-            #gradient-canvas {
-              --gradient-color-1: #bb4430;
-              --gradient-color-2: #1b1b3a;
-              --gradient-color-3: #1b1b3a;
-              --gradient-color-4: #bb4430;
-            }
-          `}
-        </style>
-        <H1>Σχολεία του δικτύου</H1>
+        <div className="py-24">
+          <H1>Σχολεία του δικτύου</H1>
+        </div>
 
         {schools.map((i, key) => (
-          <H2
-            className={` border-black-50 bg-white py-3 my-2 school cursor-default relative border-b`}
+          <H3
+            className={`border-black-50 bg-white py-3 my-2 school cursor-default relative border-b max-md:text-right`}
             key={key}
           >
             {i}
-          </H2>
+          </H3>
         ))}
       </section>
     </>
