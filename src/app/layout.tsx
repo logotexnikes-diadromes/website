@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Layout from "@/components/layout";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 const font = JetBrains_Mono({
   subsets: ["latin", "greek"],
+});
+const font_sec = IBM_Plex_Sans({
+  variable: "--plex-sans",
+  weight: ["300"],
+  subsets: ["greek", "latin"],
 });
 
 export const metadata: Metadata = {
@@ -35,7 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={font.className}>
+      <body className={`${font.className} ${font_sec.variable}`}>
         <Layout>{children}</Layout>
         <SpeedInsights
           //@ts-ignore

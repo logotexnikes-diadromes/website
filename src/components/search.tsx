@@ -30,12 +30,12 @@ export default function SearchDialog({ creations }: { creations: any }) {
   }, [search]);
   return (
     <>
-      <span
+      <button
         onClick={() => setOpen(true)}
-        className="w-6 h-6 mr-0 ml-auto self-center"
+        className="w-7 h-7 ml-auto mr-0 self-center"
       >
-        <Search />
-      </span>
+        <Search  />
+      </button>
       <Transition appear show={open} as={Fragment}>
         <Dialog
           as="div"
@@ -68,7 +68,7 @@ export default function SearchDialog({ creations }: { creations: any }) {
                 <Dialog.Panel className="transition-all">
                   <div
                     className={
-                      "bg-white border border-black-50 max-w-2xl w-screen relative z-20 p-5 min-h-[50vh] "
+                      "bg-white border border-black-50 max-w-2xl w-[95vw] relative z-20 p-5 min-h-[50vh] "
                     }
                   >
                     <H2 className="mb-5 text-red">Αναζήτηση</H2>

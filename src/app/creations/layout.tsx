@@ -134,7 +134,7 @@ export default function RootLayout({
         if (authorised) {
           return (
             <>
-              <header className="w-fit fixed bottom-0 right-0 sm:px-10 px-6 z-10">
+              <header className="fixed bottom-0 right-0 bg-white rounded-tl-lg px-4 pt-3 pb-1 z-10">
                 <User user={user} />
               </header>
 

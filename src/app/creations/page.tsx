@@ -47,19 +47,19 @@ export default function Page() {
 
   return (
     <div className="sm:mx-10 mx-6">
-      <div className="flex">
-        <H1 className={`mb-8`}>Aναρτημένες δημιουργίες</H1>
+      <div className="flex md:flex-row flex-col w-full mb-8">
+        <H1>Aναρτημένες δημιουργίες</H1>
         <SearchDialog creations={creations} />
       </div>
       <div
-        className={`grid lg:grid-cols-4 grid-cols-3 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1`}
+        className={`grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-3 grid`}
       >
         {exists ? (
           creations &&
           creations.map((i, key) => (
             <Link
               key={key}
-              className="flex flex-col border py-3 border-black-50 relative bg-white group w-full"
+              className="flex flex-col border py-3 border-black-50 relative bg-white group"
               href={"/creations/" + i.id}
             >
               <div className="w-full h-full absolute top-0 left-0 -z-10 border border-black-50 group-hover:-translate-x-2 group-hover:translate-y-1 duration-300" />

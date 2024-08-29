@@ -20,6 +20,9 @@ const config: Config = {
       },
     },
     extend: {
+      font:{
+        sans: "var(--plex-sans)"
+      },
       colors: {
         black: "#000",
         transparent: "transparent",

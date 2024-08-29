@@ -126,13 +126,13 @@ export default function User({ user }: { user: UserInfo }) {
         </Dialog>
       </Transition>
       <Popover className="relative ">
-        <Popover.Button >
+        <Popover.Button className={"outline-none"}>
           <Image
             alt={"εικόνα προφίλ του/ της" + user.displayName}
             src={user.photoURL ? user.photoURL : defaultUser}
             width={40}
             height={40}
-            className="rounded-full"
+            className="rounded-full "
           />{" "}
         </Popover.Button>
         <Transition

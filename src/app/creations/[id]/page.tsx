@@ -1,13 +1,12 @@
 "use client";
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
-import { H2, H3 } from "@/components/typography";
+import { H1, H2, H3 } from "@/components/typography";
 import Link from "next/link";
 import Button from "@/components/button";
 import { Dialog, Transition } from "@headlessui/react";
 import { Timestamp, doc, getDoc } from "firebase/firestore";
 import { db } from "@/utils/firebase";
-import { ScrollTrigger, gsap } from "gsap/all";
 import { X } from "@/components/creator/svgs";
 import ReactPlayer from "react-player";
 
@@ -106,28 +105,9 @@ export default function Page({ params }: { params: { id: string } }) {
       );
     }
   }
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.to(".hero", {
-      scrollTrigger: {
-        trigger: "#gallery",
-        scrub: true,
-        start: "top bottom",
-        end: "top 60%",
-      },
-      opacity: 0,
-    });
-    gsap.from("#gallery", {
-      scrollTrigger: {
-        trigger: "#gallery",
-        scrub: true,
-        start: "top bottom",
-        end: "top 60%",
-      },
-      opacity: 0,
-    });
-  }, [data]);
+
   const linkRegex = /(https?\:\/\/)?(www\.)?[^\s]+\.[^\s]+/g;
+
   function replacer(matched: string) {
     let withProtocol = matched;
     if (!withProtocol.startsWith("http")) {
@@ -151,60 +131,39 @@ export default function Page({ params }: { params: { id: string } }) {
       return matched;
     }
   }
+
   return (
-    <div className="min-h-screen">
+    <div className="">
       {exists ? (
         data && (
           <>
-            <section className="fixed grid h-[92vh] md:grid-cols-2 place-items-center sm:mx-10 mx-6 hero">
-              <div>
-                <H2 className="text-red">{data.title}</H2>
-                <div className="flex space-x-3">
-                  <p className="opacity-50">{data.school}</p>
-                  <p>|</p>
-                  <p className="opacity-50">
+            <section className="grid py-24 w-full place-items-center hero border-b">
+              <div className="text-center w-[97vw] max-w-screen-sm">
+                <H1 className="text-red">{data.title}</H1>
+                <div className="flex opacity-50 space-x-3 text-sm mx-auto w-fit mb-6">
+                  <p>{data.school}</p>
+                  <p className="text-red">/</p>
+                  <p>
                     {data.createdAt.toDate().getDate() +
-                      "/" +
+                      "." +
                       (data.createdAt.toDate().getMonth() + 1) +
-                      "/" +
+                      "." +
                       data.createdAt.toDate().getFullYear()}
                   </p>
                 </div>
-                <div className="mb-5 mt-2 border-b border-b-black" />
                 <p
-                  className="max-sm:text-xs"
+                  className="max-sm:text-xs mt-2"
                   dangerouslySetInnerHTML={{
                     __html: data.description.replaceAll(linkRegex, replacer),
                   }}
                 ></p>
               </div>
-              <div className="md:p-10">
-                {data.fileURLS &&
-                  data.fileURLS
-                    .map((file) => {
-                      const type = file.split(".").pop()?.split("?")[0];
-                      if (type === "jpg" || type === "png" || type === "webp") {
-                        return (
-                          <Image
-                            width={999}
-                            height={999}
-                            key={file}
-                            src={file}
-                            alt=""
-                            className="object-cover mb-2 md:max-h-[60vh] max-h-[40vh] w-auto scale-90"
-                          />
-                        );
-                      }
-                      return null;
-                    })
-
-                    .find(Boolean)}
-              </div>
             </section>
-            <div className="pb-[92vh] h-2" />
-            <H2 className="text-red sm:mx-11 mx-7 mb-4 relative z-10">
-              Αρχεία
-            </H2>
+            {data.fileURLS || data.spotify || data.youtube ? (
+              <H2 className="text-red sm:mx-11 mx-7 mb-4 relative z-10 mt-10">
+                Αρχεία
+              </H2>
+            ) : null}
             <section className="min-h-screen relative z-10">
               <div
                 className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 sm:mx-10 mx-6"

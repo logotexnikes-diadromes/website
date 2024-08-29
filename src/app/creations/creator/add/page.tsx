@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import Input from "@/components/input";
 import { Disclosure, Listbox, Transition } from "@headlessui/react";
 import { H3Small } from "@/components/typography";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   title: z.string({ required_error: "Ο τίτλος είναι απαρίτητος" }),
@@ -23,6 +24,7 @@ const formSchema = z.object({
 });
 
 export default function Page() {
+  const router = useRouter();
   const [files, setFiles] = useState<null | FileList>(null);
   const [schools, setSchools] = useState<String[] | null>(null);
   const {
@@ -66,6 +68,7 @@ export default function Page() {
           .then(() => {
             toast.dismiss();
             toast("Η δημιουργία σας προστέθηκε!");
+            router.push("/creations/creator");
           })
           .catch((e) => {
             toast.dismiss();
@@ -78,6 +81,7 @@ export default function Page() {
         .then(() => {
           toast.dismiss();
           toast("Η δημιουργία σας προστέθηκε!");
+          router.push("/creations/creator");
         })
         .catch((e) => {
           toast.dismiss();
@@ -98,7 +102,7 @@ export default function Page() {
         </div>
         <div className="mb-8" />
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="grid">
+      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
         <Controller
           control={control}
           name="title"

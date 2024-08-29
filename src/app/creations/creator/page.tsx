@@ -142,7 +142,7 @@ export default function Page() {
     <div className="space-y-5 sm:mx-10 mx-6">
       <section>
         <div className="flex items-center space-x-2 relative">
-          <H3>Οι δημιουργίες μου</H3>
+          <H3 className="text-red">Οι δημιουργίες μου</H3>
           <Link href={"creator/add"} className="absolute right-0">
             <NButton.default className="">Προσθήκη</NButton.default>
           </Link>
