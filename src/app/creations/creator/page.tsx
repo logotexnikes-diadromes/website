@@ -139,16 +139,15 @@ export default function Page() {
     }
   }
   return (
-    <div className="space-y-5 sm:mx-10 mx-6">
+    <div>
       <section>
-        <div className="flex items-center space-x-2 relative">
-          <H3 className="text-red">Οι δημιουργίες μου</H3>
-          <Link href={"creator/add"} className="absolute right-0">
-            <NButton.default className="">Προσθήκη</NButton.default>
+        <div className="flex items-center  space-x-4 py-14 px-10">
+          <H3 className="text-red mr-auto">Οι δημιουργίες μου</H3>
+          <Link href={"creator/add"} className="">
+            <NButton.default>Προσθήκη</NButton.default>
           </Link>
         </div>
-        <div className="mb-8" />
-        {loader()}
+        <div className="mt-8 px-6">{loader()}</div>
         <Transition appear show={isOpen} as={"div"}>
           <Dialog
             open={isOpen}

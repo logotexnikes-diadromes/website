@@ -93,8 +93,8 @@ export default function Page() {
 
   return (
     <div>
-      <div className="px-6 py-14 relative">
-        <H3 className="text-red px-6">Προσθήκη δημιουργίας</H3>
+      <div className="px-10 py-14">
+        <H3 className="text-red">Προσθήκη δημιουργίας</H3>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 px-6">
         <Controller
