@@ -1,5 +1,5 @@
 "use client";
-
+import "./font.css"
 import { Gradient } from "@/components/gradient";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

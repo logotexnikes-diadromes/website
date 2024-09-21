@@ -13,18 +13,16 @@ export const metadata: Metadata = {
   description: `ετήσιο πρόγραμμα φιλαναγνωσίας`,
   authors: [{ name: "Αλεξάνδρα Μητσιάλη" }, { name: "Στράτος Ιλερής" }],
   creator: "Στράτος Ιλερής",
-  keywords:
-    "λογοτεχνικές διαδρομές στην ιστορία, ετήσιο πρόγραμμα φιλαναγνωσίας, λογοτεχνικές διαδρομές",
+  metadataBase: new URL("https://logotexnikes-diadromes.gr"),
   openGraph: {
     emails: [
       "info@logotexnikes-diadromes.gr",
       "support@logotexnikes-diadromes.gr",
     ],
-    type: "website",
-    siteName: "Λογοτεχνικές διαδρομές στην ιστορία",
     title: "Λογοτεχνικές διαδρομές στην ιστορία",
     url: "https://logotexnikes-diadromes.gr",
     description: `ετήσιο πρόγραμμα φιλαναγνωσίας`,
+    images: "/og-image.png",
   },
 };
 

@@ -29,24 +29,24 @@ const nextConfig = {
 
 module.exports = withMDX(nextConfig);
 
-const { withSentryConfig } = require("@sentry/nextjs");
+// const { withSentryConfig } = require("@sentry/nextjs");
 
-module.exports = withSentryConfig(
-  module.exports,
-  {
-    silent: true,
-    org: "914e549ccfb6",
-    project: "javascript-nextjs",
-  },
-  {
-    // Upload a larger set of source maps for prettier stack traces (increases build time)
-    widenClientFileUpload: true,
+// module.exports = withSentryConfig(
+//   module.exports,
+//   {
+//     silent: true,
+//     org: "914e549ccfb6",
+//     project: "javascript-nextjs",
+//   },
+//   {
+//     // Upload a larger set of source maps for prettier stack traces (increases build time)
+//     widenClientFileUpload: true,
 
-    // Transpiles SDK to be compatible with IE11 (increases bundle size)
-    transpileClientSDK: false,
-    tunnelRoute: "/monitoring",
-    hideSourceMaps: true,
-    disableLogger: true,
-    automaticVercelMonitors: true,
-  }
-);
+//     // Transpiles SDK to be compatible with IE11 (increases bundle size)
+//     transpileClientSDK: false,
+//     tunnelRoute: "/monitoring",
+//     hideSourceMaps: true,
+//     disableLogger: true,
+//     automaticVercelMonitors: true,
+//   }
+// );

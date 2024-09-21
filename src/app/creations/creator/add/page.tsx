@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@/components/button";
 import { Controller, useForm } from "react-hook-form";
 import Link from "next/link";
-import { ChevronLeft, ChevronsUpDown } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronsUpDown } from "lucide-react";
 import addfunc from "@/utils/add";
 import * as z from "zod";
 import { Fragment, useEffect, useState } from "react";
@@ -12,7 +12,7 @@ import { auth } from "@/utils/firebase";
 import toast from "react-hot-toast";
 import Input from "@/components/input";
 import { Disclosure, Listbox, Transition } from "@headlessui/react";
-import { H3Small } from "@/components/typography";
+import { H3, H3Small } from "@/components/typography";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
@@ -92,17 +92,11 @@ export default function Page() {
   const watchSchool = watch("school");
 
   return (
-    <div className="mx-10">
-      <div className="flex mb-8">
-        <div className="flex items-center space-x-2">
-          <Link href={"./"}>
-            <ChevronLeft />
-          </Link>
-          <H3Small className="font-medium">Προσθήκη δημιουργίας</H3Small>
-        </div>
-        <div className="mb-8" />
+    <div>
+      <div className="px-6 py-14 relative">
+        <H3 className="text-red px-6">Προσθήκη δημιουργίας</H3>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 px-6">
         <Controller
           control={control}
           name="title"
@@ -120,86 +114,71 @@ export default function Page() {
           control={control}
           name="school"
           render={({ field: { onChange, value } }) => (
-            <div className="mt-5">
-              <div className="relative">
-                <label
-                  className={`absolute -top-3 text-sm left-3 bg-white peer-focus:translate-x-1 peer-focus:-translate-y-1 peer-focus:scale-90 peer-focus:opacity-75 duration-300 ${
-                    errors.school && "text-red peer-focus:opacity-100"
-                  }`}
+            <div>
+              <label className={`text-sm ml-3 ${errors.school && "text-red"}`}>
+                Σχολείο
+              </label>
+              <Listbox
+                as={"div"}
+                onChange={onChange}
+                value={value}
+                className={"relative"}
+              >
+                <Listbox.Button
+                  className={`border border-black/10 bg-neutral-50 rounded-xl w-full outline-none py-2 px-3 text-left`}
                 >
-                  Σχολείο
-                </label>
-
-                <Listbox
-                  as={"div"}
-                  onChange={onChange}
-                  value={value}
-                  className={"relative"}
-                >
-                  <Listbox.Button
-                    className={
-                      "border-b border-black-50 w-full focus:outline-none pt-3 pb-1 px-1 text-left"
-                    }
+                  {watchSchool ? watchSchool : "Επιλέξτε ένα σχολείο"}
+                </Listbox.Button>
+                <div className="absolute -bottom-18 -mb-0.5 left-0 z-10">
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-in duration-100"
+                    leave="transition ease-in duration-100"
+                    enterFrom="-translate-y-2 opacity-0"
+                    enterTo="opacity-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="-translate-y-2 opacity-0"
                   >
-                    {watchSchool ? watchSchool : "Επιλέξτε ένα σχολείο"}
-                  </Listbox.Button>
-                  <div className="absolute -bottom-18 -mb-0.5 left-0 z-10">
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-in duration-100"
-                      leave="transition ease-in duration-100"
-                      enterFrom="-translate-y-2 opacity-0"
-                      enterTo="opacity-100"
-                      leaveFrom="opacity-100"
-                      leaveTo="-translate-y-2 opacity-0"
+                    <Listbox.Options
+                      className={
+                        "bg-white border-b border-x border-black-50 cursor-pointer "
+                      }
                     >
-                      <Listbox.Options
-                        className={
-                          "bg-white border-b border-x border-black-50 cursor-pointer "
-                        }
-                      >
-                        {schools &&
-                          schools.map((i, key) => (
-                            <Listbox.Option
-                              key={key}
-                              value={i}
-                              className="flex border-b w-full px-4 py-2 hover:bg-slate-50 duration-300"
-                            >
-                              {i}
-                            </Listbox.Option>
-                          ))}
-                      </Listbox.Options>
-                    </Transition>
-                  </div>
-                </Listbox>
-                {errors.school && (
-                  <p className="text-red text-xs mt-0.5 ml-0.5 ">
-                    {errors.school.message}
-                  </p>
-                )}
-              </div>
+                      {schools &&
+                        schools.map((i, key) => (
+                          <Listbox.Option
+                            key={key}
+                            value={i}
+                            className="flex border-b w-full px-4 py-2 hover:bg-slate-50 duration-300"
+                          >
+                            {i}
+                          </Listbox.Option>
+                        ))}
+                    </Listbox.Options>
+                  </Transition>
+                </div>
+              </Listbox>
+              {errors.school && (
+                <p className="text-red text-xs mt-0.5 ml-0.5 ">
+                  {errors.school.message}
+                </p>
+              )}
             </div>
           )}
         />
-        <div className="mt-5">
-          <div className="relative">
-            <textarea
-              className={`border-b border-black-50 w-full focus:outline-none pt-3 pb-1 px-1 peer h-52 resize-none`}
-              {...register("description")}
-            />
-            <label
-              className={`absolute -top-3 text-sm left-3 bg-white peer-focus:translate-x-1 peer-focus:-translate-y-1 peer-focus:scale-90 peer-focus:opacity-75 duration-300 ${
-                errors.description && "text-red peer-focus:opacity-100"
-              }`}
-            >
-              Περιγραφή
-            </label>
-            {errors.description && (
-              <p className="text-red text-xs mt-0.5 ml-0.5">
-                {errors.description.message}
-              </p>
-            )}
-          </div>
+        <div>
+          <label className={`text-sm ml-3 ${errors.description && "text-red"}`}>
+            Περιγραφή
+          </label>
+          <textarea
+            className={`border border-black/10 bg-neutral-50 rounded-xl w-full outline-none py-2 px-3`}
+            {...register("description")}
+          />
+          {errors.description && (
+            <p className="text-red text-xs mt-0.5 ml-0.5">
+              {errors.description.message}
+            </p>
+          )}
         </div>
         <Input
           type="file"
@@ -215,24 +194,21 @@ export default function Page() {
           </Link>
         </p>
         <Disclosure>
-          <Disclosure.Button className="py-2 w-full">
-            <div className="flex items-center justify-between space-x-4 px-4">
-              <h4 className="text-sm font-semibold">Σύνδεσμοι</h4>
-              <Button type="button" className="!px-3">
-                <ChevronsUpDown className="h-4 w-4" />
-                <span className="sr-only">Toggle</span>
-              </Button>
+          <Disclosure.Button className="py-3 w-full bg-neutral-50 rounded-t-xl group border border-black/10">
+            <div className="flex items-center justify-between space-x-4 px-4 ">
+              <h4 className="font-medium">Σύνδεσμοι</h4>
+              <ChevronDown className="opacity-50 group-hover:translate-y-1 duration-200" />
             </div>{" "}
           </Disclosure.Button>
           <Transition
-            enter="transition duration-100 ease-out"
-            enterFrom="transform scale-95 opacity-0"
-            enterTo="transform scale-100 opacity-100"
-            leave="transition duration-75 ease-out"
-            leaveFrom="transform scale-100 opacity-100"
-            leaveTo="transform scale-95 opacity-0"
+            enter="transition duration-300 ease-out"
+            enterFrom="transform -translate-y-8 opacity-0"
+            enterTo="transform translate-y-0 opacity-100"
+            leave="transition duration-200 ease-out"
+            leaveFrom="transform translate-y-0 opacity-100"
+            leaveTo="transform -translate-y-8 opacity-0"
           >
-            <Disclosure.Panel className="mx-3">
+            <Disclosure.Panel className="p-5 rounded-b-xl -translate-y-4 border border-t-0 border-black/10">
               <Controller
                 control={control}
                 name="spotify"
@@ -251,8 +227,9 @@ export default function Page() {
             </Disclosure.Panel>
           </Transition>
         </Disclosure>
-        <br />
-        <Button type="submit">Υποβολή</Button>
+        <div className="w-full mt-3 text-right">
+          <Button type="submit">Υποβολή</Button>
+        </div>
       </form>
     </div>
   );
