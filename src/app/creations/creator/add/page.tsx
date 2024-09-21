@@ -141,7 +141,7 @@ export default function Page() {
                   >
                     <Listbox.Options
                       className={
-                        "bg-white border-b border-x border-black-50 cursor-pointer "
+                        "bg-neutral-50 border rounded-xl border-black/10 cursor-pointer mt-2 ml-3"
                       }
                     >
                       {schools &&
@@ -149,7 +149,7 @@ export default function Page() {
                           <Listbox.Option
                             key={key}
                             value={i}
-                            className="flex border-b w-full px-4 py-2 hover:bg-slate-50 duration-300"
+                            className="flex w-full px-4 py-2 hover:bg-neutral-200 rounded-xl duration-200"
                           >
                             {i}
                           </Listbox.Option>
