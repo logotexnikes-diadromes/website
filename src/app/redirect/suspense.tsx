@@ -79,60 +79,66 @@ export default function ActualPage() {
       });
     }
   };
-  if (pageData) {
-    return (
-      <div className="grid place-items-center h-[90vh]">
-        {pageData &&
-          (pageData.success ? (
-            <div className="border border-black-50 w-fuld max-w-lg rounded-xl">
-              {pageData.ogImage && (
-                <img
-                  className="w-full rounded-t-xl"
-                  src={pageData.ogImage[0].url}
-                />
-              )}
-              <div className="p-5">
-                <div className="flex space-x-4 items-center">
-                  <div className="border bg-stone-100 border-black/20 rounded-full w-10 h-10 aspect-square p-1">
-                    <img
-                      src={getFavicon(pageData.favicon, pageData.requestUrl)}
-                    />
-                  </div>
-                  <div>
-                    <p className="text-xs mb-1 opacity-70">
-                      {pageData.requestUrl}
-                    </p>
-                    <p>{pageData.ogTitle}</p>
-                  </div>
+  return (
+    <div className="grid place-items-center h-[90vh]">
+      {pageData ? (
+        pageData.success ? (
+          <div className="border border-black-50 w-fuld max-w-lg rounded-xl">
+            {pageData.ogImage && (
+              <img
+                className="w-full rounded-t-xl"
+                src={pageData.ogImage[0].url}
+              />
+            )}
+            <div className="p-5">
+              <div className="flex space-x-4 items-center">
+                <div className="border bg-stone-100 border-black/20 rounded-full w-10 h-10 aspect-square p-1">
+                  <img
+                    src={getFavicon(pageData.favicon, pageData.requestUrl)}
+                  />
                 </div>
-                <p className="mt-3 text-sm">{pageData.ogDescription}</p>
-                <div className="flex w-full items-end mt-5">
-                  <Link href={getRedirectLink()} className="ml-auto ">
-                    <Button>Ανακατεύθυνση</Button>
-                  </Link>
-                </div>{" "}
+                <div>
+                  <p className="text-xs mb-1 opacity-70">
+                    {pageData.requestUrl}
+                  </p>
+                  <p>{pageData.ogTitle}</p>
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="border border-black-50 p-5 w-full max-w-lg">
-              <h1 className="text-2xl text-red">
-                Συνέχεια σε{" "}
-                <span className="">
-                  {decodeURI(link).split("//")[1].split("/")[0]}
-                </span>
-              </h1>
-              <p className="text-base mt-2 leading-snug mb-6">
-                Δεν μπορέσαμε να συλλέξουμε περισσότερες πληροφορίες για την
-                ιστοσελίδα.
-              </p>
-              <div className="flex w-full items-end">
+              <p className="mt-3 text-sm">{pageData.ogDescription}</p>
+              <div className="flex w-full items-end mt-5">
                 <Link href={getRedirectLink()} className="ml-auto ">
                   <Button>Ανακατεύθυνση</Button>
                 </Link>
-              </div>
+              </div>{" "}
             </div>
-          ))}
-      </div>
-    );
-  }
+          </div>
+        ) : (
+          <div className="border border-black-50 p-5 w-full max-w-lg">
+            <h1 className="text-2xl text-red">
+              Συνέχεια σε{" "}
+              <span className="">
+                {decodeURI(link).split("//")[1].split("/")[0]}
+              </span>
+            </h1>
+            <p className="text-base mt-2 leading-snug mb-6">
+              Δεν μπορέσαμε να συλλέξουμε περισσότερες πληροφορίες για την
+              ιστοσελίδα.
+            </p>
+            <div className="flex w-full items-end">
+              <Link href={getRedirectLink()} className="ml-auto ">
+                <Button>Ανακατεύθυνση</Button>
+              </Link>
+            </div>
+          </div>
+        )
+      ) : (
+        <div className="border border-black-50 p-5 py-10 w-full max-w-lg">
+          <h1 className="text-xl text-center">
+            Έλεγχος{" "}
+            {decodeURI(link).split("//")[1].split("/")[0]}
+          </h1>
+        </div>
+      )}
+    </div>
+  );
 }

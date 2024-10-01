@@ -117,7 +117,7 @@ export default function Page({ params }: { params: { id: string } }) {
       `<a
       target="__blank"
       class="underline text-red underline-offset-2"
-      href=""https://logotexnikes-diadromes.gr/redirect?link=" + ${withProtocol} + "&from=" + ${window.location.href}"
+      href=${`https://logotexnikes-diadromes.gr/redirect?link=${withProtocol}&from=${window.location.href}`}
 
       >
       ${show}
