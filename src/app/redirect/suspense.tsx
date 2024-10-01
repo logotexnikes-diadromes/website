@@ -80,13 +80,13 @@ export default function ActualPage() {
     }
   };
   return (
-    <div className="grid place-items-center h-[90vh]">
+    <div className="grid place-items-center min-h-[90vh] max-sm:p-5">
       {pageData ? (
         pageData.success ? (
-          <div className="border border-black-50 w-fuld max-w-lg rounded-xl">
+          <div className="border border-black-50 w-full max-w-lg rounded-xl">
             {pageData.ogImage && (
               <img
-                className="w-full rounded-t-xl"
+                className="w-full rounded-t-xl max-w-[100vw]"
                 src={pageData.ogImage[0].url}
               />
             )}
@@ -98,13 +98,13 @@ export default function ActualPage() {
                   />
                 </div>
                 <div>
-                  <p className="text-xs mb-1 opacity-70">
+                  <p className="text-xs mb-0.5 opacity-70">
                     {pageData.requestUrl}
                   </p>
                   <p>{pageData.ogTitle}</p>
                 </div>
               </div>
-              <p className="mt-3 text-sm">{pageData.ogDescription}</p>
+              <p className="mt-3 text-sm max-sm:text-xs">{pageData.ogDescription}</p>
               <div className="flex w-full items-end mt-6">
                 <Link
                   href={from}

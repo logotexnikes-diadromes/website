@@ -16,11 +16,11 @@ export default function Processing({
   return (
     <div className="grid place-items-center h-[80vh]">
       <div className="border border-black-50 p-5 w-full max-w-md">
-        <CardTitle className="mb-3">Επεξεργασία αιτήματος</CardTitle>
-        <CardDescription className="mb-2">
-          Το αιτημά σας θα επεξεργαστεί όσο το δυνατό πιο γρήγορα!
+        <CardTitle className="mb-2">Επεξεργασία αιτήματος</CardTitle>
+        <CardDescription className="mb-5">
+          Θα απαντήσουμε στο αιτημά σας όσο το δυνατό πιο γρήγορα!
         </CardDescription>
-        <div className="flex border border-black-50 p-3">
+        <div className="flex border border-black-50 p-3 items-center rounded-2xl">
           {user.photoURL && (
             <Image
               alt={"εικόνα προφίλ του/ της" + user.displayName}
@@ -30,12 +30,12 @@ export default function Processing({
               className="rounded-full w-12 h-12"
             />
           )}
-          <div className="ml-3">
+          <div className="ml-4">
             <h1 className="text-xl font-medium">{user.displayName}</h1>
             <p className="text-sm">{user.email}</p>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex mt-6">
           <Button
             className="mt-1"
             onClick={() => {
