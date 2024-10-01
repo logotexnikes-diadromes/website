@@ -123,7 +123,12 @@ export default function Page() {
               </div>
               <Link
                 target="_blank"
-                href={i.url}
+                href={
+                  "https://logotexnikes-diadromes.gr/redirect?link=" +
+                  i.url +
+                  "&from=" +
+                  window.location.href
+                }
                 className="text-[#6616b6] mt-1 hover:underline"
               >
                 {i.name}

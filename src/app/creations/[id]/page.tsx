@@ -117,7 +117,8 @@ export default function Page({ params }: { params: { id: string } }) {
       `<a
       target="__blank"
       class="underline text-red underline-offset-2"
-      href="${withProtocol}"
+      href=""https://logotexnikes-diadromes.gr/redirect?link=" + ${withProtocol} + "&from=" + ${window.location.href}"
+
       >
       ${show}
       </a>`;
@@ -173,7 +174,12 @@ export default function Page({ params }: { params: { id: string } }) {
                   data.fileURLS.map((i, key) => <Media key={key} file={i} />)}
                 {data.youtube && (
                   <Link
-                    href={data.youtube}
+                    href={
+                      "https://logotexnikes-diadromes.gr/redirect?link=" +
+                      data.youtube +
+                      "&from=" +
+                      window.location.href
+                    }
                     className="sm:p-10 p-6 grid aspect-square border border-black-50 m-2 place-items-end"
                     target="_blank"
                   >
@@ -187,10 +193,15 @@ export default function Page({ params }: { params: { id: string } }) {
                       setContent(
                         <div>
                           <Link
-                            href={`${data.spotify.replace(
-                              `/embed/episode/`,
-                              `/episode/`
-                            )}`}
+                            href={
+                              "https://logotexnikes-diadromes.gr/redirect?link=" +
+                              data.spotify.replace(
+                                `/embed/episode/`,
+                                `/episode/`
+                              ) +
+                              "&from=" +
+                              window.location.href
+                            }
                             target="_blank"
                             className="focus:outline-none"
                           >

@@ -43,7 +43,16 @@ export default function Page({ params }: { params: { id: string } }) {
           <section className="w-full max-w-lg m-auto -translate-y-5">
             <p className="mb-2 text-sm opacity-75 text-right">
               από{" "}
-              <Link href={i.bio_link} target="_blank" className="underline">
+              <Link
+                href={
+                  "https://logotexnikes-diadromes.gr/redirect?link=" +
+                  i.bio_link +
+                  "&from=" +
+                  window.location.href
+                }
+                target="_blank"
+                className="underline"
+              >
                 Βιβλιοnet
               </Link>
             </p>

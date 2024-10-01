@@ -114,7 +114,12 @@ export default function Page() {
                   )}
                   {creation.spotify !== "" && (
                     <Link
-                      href={creation.spotify}
+                      href={
+                        "https://logotexnikes-diadromes.gr/redirect?link=" +
+                        creation.spotify +
+                        "&from=" +
+                        window.location.href
+                      }
                       target="_blank"
                       className="inline-flex border text-xs p-1 py-0.5"
                     >
@@ -123,7 +128,12 @@ export default function Page() {
                   )}
                   {creation.youtube !== "" && (
                     <Link
-                      href={creation.youtube}
+                      href={
+                        "https://logotexnikes-diadromes.gr/redirect?link=" +
+                        creation.youtube +
+                        "&from=" +
+                        window.location.href
+                      }
                       target="_blank"
                       className="inline-flex border text-xs p-1 py-0.5"
                     >
