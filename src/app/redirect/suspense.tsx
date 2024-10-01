@@ -57,7 +57,13 @@ export default function ActualPage() {
     if (favicon.startsWith("http")) {
       return favicon;
     } else {
-      return url.split("?")[0] + favicon;
+      if (url.split("/").length >= 4) {
+        const finalUrl =
+          url.split("/")[0] + "/" + url.split("/")[1] + "/" + url.split("/")[2];
+        return finalUrl + favicon;
+      } else {
+        return url.split("?")[0] + favicon;
+      }
     }
   };
 
@@ -104,7 +110,9 @@ export default function ActualPage() {
                   <p>{pageData.ogTitle}</p>
                 </div>
               </div>
-              <p className="mt-3 text-sm max-sm:text-xs">{pageData.ogDescription}</p>
+              <p className="mt-3 text-sm max-sm:text-xs">
+                {pageData.ogDescription}
+              </p>
               <div className="flex w-full items-end mt-6">
                 <Link
                   href={from}
