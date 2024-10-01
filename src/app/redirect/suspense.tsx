@@ -105,7 +105,13 @@ export default function ActualPage() {
                 </div>
               </div>
               <p className="mt-3 text-sm">{pageData.ogDescription}</p>
-              <div className="flex w-full items-end mt-5">
+              <div className="flex w-full items-end mt-6">
+                <Link
+                  href={from}
+                  className="text-sm underline hover:no-underline opacity-75"
+                >
+                  Άκυρο
+                </Link>
                 <Link href={getRedirectLink()} className="ml-auto ">
                   <Button>Ανακατεύθυνση</Button>
                 </Link>
@@ -124,19 +130,29 @@ export default function ActualPage() {
               Δεν μπορέσαμε να συλλέξουμε περισσότερες πληροφορίες για την
               ιστοσελίδα.
             </p>
-            <div className="flex w-full items-end">
+            <div className="flex w-full items-end ">
+              <Link
+                href={from}
+                className="text-sm underline hover:no-underline opacity-75"
+              >
+                Άκυρο
+              </Link>
               <Link href={getRedirectLink()} className="ml-auto ">
                 <Button>Ανακατεύθυνση</Button>
               </Link>
-            </div>
+            </div>{" "}
           </div>
         )
       ) : (
-        <div className="border border-black-50 p-5 py-10 w-full max-w-lg">
-          <h1 className="text-xl text-center">
-            Έλεγχος{" "}
-            {decodeURI(link).split("//")[1].split("/")[0]}
+        <div className="border border-black-50 p-5 w-full max-w-lg">
+          <h1 className="text-xl ">
+            Έλεγχος {decodeURI(link).split("//")[1].split("/")[0]}...
           </h1>
+          <div className="flex w-full items-end">
+            <Link href={getRedirectLink()} className="ml-auto mt-6">
+              <Button>Παράλειψη</Button>
+            </Link>
+          </div>{" "}
         </div>
       )}
     </div>
