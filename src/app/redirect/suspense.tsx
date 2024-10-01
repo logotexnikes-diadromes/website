@@ -34,11 +34,15 @@ export default function ActualPage() {
 
   const [pageData, setPageData] = useState<OgResult | null>(null);
   useEffect(() => {
+
     if (!from) {
       router.push("https://logotexnikes-diadromes.gr");
     }
     if (!link) {
       router.push(decodeURI(from));
+    }
+    if(link.startsWith("/")){
+      router.push(decodeURI(link))
     }
     fetchOpenGraphData();
   }, []);
