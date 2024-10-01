@@ -1,4 +1,3 @@
-import { H1 } from "@/components/typography";
 import { Metadata } from "next";
 import Link from "next/link";
 const links = [
@@ -126,8 +125,7 @@ export default function Page() {
                 href={
                   "https://logotexnikes-diadromes.gr/redirect?link=" +
                   i.url +
-                  "&from=" +
-                  window.location.href
+                  "&from=https://logotexnikes-diadromes.gr/links"
                 }
                 className="text-[#6616b6] mt-1 hover:underline"
               >
