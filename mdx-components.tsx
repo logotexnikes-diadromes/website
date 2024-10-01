@@ -31,7 +31,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         href={
           "https://logotexnikes-diadromes.gr/redirect?link=" +
           href +
-          "&from=https://logotexnikes-diadromes/help"
+          "&from=https://logotexnikes-diadromes.gr/help"
         }
         className="underline"
         target="_blank"
